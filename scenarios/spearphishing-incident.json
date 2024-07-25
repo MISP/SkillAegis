@@ -1,0 +1,519 @@
+{
+  "exercise": {
+    "description": "MISP Encoding Exercise : Spearphishing Incident",
+    "expanded": "MISP Encoding Exercise : Spearphishing Incident",
+    "meta": {
+      "author": "MISP Project",
+      "level": "beginner",
+      "priority": 5
+    },
+    "name": "MISP Encoding Exercise : Spearphishing Incident",
+    "namespace": "data-model",
+    "tags": [
+      "exercise:software-scope=\"misp\"",
+      "state:production"
+    ],
+    "total_duration": "7200",
+    "uuid": "53b20321-ac8c-4a3e-9c56-e772caf669e6",
+    "version": "20240715"
+  },
+  "inject_flow": [
+    {
+      "description": "event-creation",
+      "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd",
+      "reporting_callback": [],
+      "requirements": {},
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": [
+          "startex"
+        ]
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "IP-address",
+      "inject_uuid": "92fc404b-2dce-4815-8a7e-b68a582c3569",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "malicious-payloads",
+      "inject_uuid": "cfc47f7c-590c-4897-bfb9-cc72965fee24",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Download URL",
+      "inject_uuid": "e849a314-3394-4501-a9e1-126e0e61f11d",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "CVE",
+      "inject_uuid": "32141393-adce-4007-950c-77b4c7c60a39",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "C2",
+      "inject_uuid": "a0d7f076-1737-4c1c-af36-c2717885299e",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Person",
+      "inject_uuid": "92a55537-0e4c-44f8-8bcd-102c38d343a9",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Contextualization",
+      "inject_uuid": "b19e8d39-e64e-4a51-94ee-462cd74b8d24",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Published",
+      "inject_uuid": "930459b8-ed61-4e62-b072-071577ea0430",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    }
+  ],
+  "inject_payloads": [],
+  "injects": [
+    {
+      "action": "event-creation",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            }
+          ],
+          "result": "MISP Event created",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            10
+          ]
+        }
+      ],
+      "name": "Event Creation",
+      "target_tool": "MISP",
+      "uuid": "a95726bb-2761-442d-8b5c-842e384df2bd"
+    },
+    {
+      "action": "ip-address",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value == \"john.doe@luxembourg.edu\")": {
+                "extract_type": "all",
+                "comparison": "count",
+                "values": [
+                  ">0"
+                ]
+              }
+            }
+          ],
+          "result": "Email address spoofed",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Email address",
+      "target_tool": "MISP",
+      "uuid": "92fc404b-2dce-4815-8a7e-b68a582c3569"
+    },
+    {
+      "action": "malware-sample",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              ".Event.Object[].Attribute[].value": {
+                "extract_type": "all",
+                "comparison": "contains",
+                "values": [
+                  "7c08ddb3b57cf9a00f02a484e23a4b6c8a6d738d"
+                ]
+              }
+            }
+          ],
+          "result": "Malware samples added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Malware sample",
+      "target_tool": "MISP",
+      "uuid": "cfc47f7c-590c-4897-bfb9-cc72965fee24"
+    },
+    {
+      "action": "download url",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              ".Event.Object[].Attribute[] | select((.type == \"url\")).value": {
+                "extract_type": "all",
+                "comparison": "contains",
+                "values": [
+                  "https://evilprovider.com/this-is-not-malicious.exe"
+                ]
+              }
+            },
+            {
+              ".Event.Object[].Attribute[] | select((.type == \"domain\") or (.type == \"hostname\")).value": {
+                "extract_type": "all",
+                "comparison": "equals",
+                "values": [
+                  "evilprovider.com"
+                ]
+              }
+            }
+          ],
+          "result": "Download URL added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Download URL",
+      "target_tool": "MISP",
+      "uuid": "e849a314-3394-4501-a9e1-126e0e61f11d"
+    },
+    {
+      "action": "CVE",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                "extract_type": "all",
+                "comparison": "contains",
+                "values": [
+                  "CVE-2015-5465"
+                ]
+              }
+            }
+          ],
+          "result": "CVE",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "CVE",
+      "target_tool": "MISP",
+      "uuid": "32141393-adce-4007-950c-77b4c7c60a39"
+    },
+    {
+      "action": "C2",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              ".Event.Object[] | select((.name == \"url\")).Attribute[] | select(.type == \"url\").value": {
+                "extract_type": "all",
+                "comparison": "contains-regex",
+                "values": [
+                  "https:\\/\\/another\\.evil\\.provider\\.com(:57666)?"
+                ]
+              }
+            }
+          ],
+          "result": "C2 added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "C2",
+      "target_tool": "MISP",
+      "uuid": "a0d7f076-1737-4c1c-af36-c2717885299e"
+    },
+    {
+      "action": "Email Provider",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              "[(.Event.Object[] | select((.name == \"email\")).Attribute[]), .Event.Attribute[]] | .[].value": {
+                "extract_type": "all",
+                "comparison": "contains",
+                "values": [
+                  "throwaway-email-provider.com"
+                ]
+              }
+            }
+          ],
+          "result": "Email Provider added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Email Provider",
+      "target_tool": "MISP",
+      "uuid": "92a55537-0e4c-44f8-8bcd-102c38d343a9"
+    },
+    {
+      "action": "context",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              ".Event.Tag | select(length > 0) | .[].name": {
+                "extract_type": "all",
+                "comparison": "count",
+                "values": [
+                  ">=3"
+                ]
+              }
+            }
+          ],
+          "result": "Context added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Contextualization",
+      "target_tool": "MISP",
+      "uuid": "b19e8d39-e64e-4a51-94ee-462cd74b8d24"
+    },
+    {
+      "action": "published",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "regex",
+                "values": [
+                  ".*[sS]pear[-\\s]?phishing.*"
+                ]
+              }
+            },
+            {
+              ".Event.published": {
+                "comparison": "equals",
+                "values": [
+                  "1"
+                ]
+              }
+            }
+          ],
+          "result": "Event published",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Published",
+      "target_tool": "MISP",
+      "uuid": "930459b8-ed61-4e62-b072-071577ea0430"
+    }
+  ]
+}
