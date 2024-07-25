@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="skillaegis-logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillAegis</title>
+  </head>
+  <body>
+    <div id="app">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <span id="logo"></span>
+        <span style="margin-top: 1rem; font-size: 2rem;">SkillAegis</span>
+      </div>
+
+      <div style="margin-top: 3rem; display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+        <a href="{{url_dashboard}}" class="card">
+          <span>Live Exercise Dashboard</span>
+        </a>
+        <a href="{{url_editor}}" class="card">
+          <span>Scenario Editor</span>
+        </a>
+      </div>
+  </body>
+</html>
+
+<style>
+  body {
+    height: 100vh;
+    min-height: 100%;
+    background-color: #374151;
+    display: flex;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
+  #app {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: rgb(148, 163, 184);
+  }
+
+  #logo {
+    background-image: url(skillaegis-logo.svg);
+    width: 160px;
+    height: 160px;
+    display: block;
+    background-size: 160px;
+  }
+
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    height: 4rem;
+    width: 16rem;
+    border: 1px solid #334155;
+    border-radius: 0.5em;
+    background-color: #475569;
+    cursor: pointer;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    text-decoration: none;
+  }
+
+  .card:hover {
+    background-color: #64748b;
+    --tw-translate-x: 0;
+    --tw-translate-y: -4px;
+    --tw-scale-x: 1.02;
+    --tw-scale-y: 1.02;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .card > span {
+    color: #f1f5f9;
+    text-wrap: nowrap;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+</style>
