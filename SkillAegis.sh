@@ -64,4 +64,5 @@ screen -S $SESSION -X screen -t "$APP_MAIN" bash -c "python3 app.py --host $MAIN
 screen -S $SESSION -X screen -t "$APP_DASHBOARD" bash -c "cd SkillAegis-Dashboard && bash start.sh --host $DASHBOARD_HOST --port $DASHBOARD_PORT --exercise_folder $SCENARIO_FOLDER_ABSOLUTE; read x;"
 screen -S $SESSION -X screen -t "$APP_EDITOR" bash -c "cd SkillAegis-Editor && bash start.sh --host $EDITOR_HOST --port $EDITOR_PORT --exercise_folder $SCENARIO_FOLDER_ABSOLUTE; read x;"
 
-screen -r $SESSION
+sleep 0.5
+screen -d -r $SESSION -p $APP_MAIN

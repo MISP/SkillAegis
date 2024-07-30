@@ -73,6 +73,7 @@ def main():
 
     with socketserver.TCPServer((args.host, args.port), Handler) as httpd:
         print(f'Serving main server on {args.host}:{args.port}')
+        print(f'Access the application here: http://127.0.0.1:{args.port}')
         httpd.serve_forever()
 
 if __name__ == '__main__':
