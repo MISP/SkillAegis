@@ -6,9 +6,9 @@
 
 ## Features
 
-- **Create Exercise Scenarios**: Easily design and customize various training exercises tailored to your needs.
+- **Create Exercise Scenarios**: Design and customize various training exercises tailored to your needs.
 - **Run Exercises**: Deploy scenarios and manage sessions with real-time execution.
-- **Live Dashboard**: Monitor progress and performance with our intuitive live dashboard, providing instant insights and analytics.
+- **Live Dashboard**: Monitor progress and performance with the live dashboard, providing instant insights and analytics.
 
 ## Installation
 
@@ -27,18 +27,24 @@ To get started with SkillAegis, follow these steps:
     git submodule update --init --recursive
     ```
 
+## Project Structure
+
+The project is composed of two application:
+
+1. **SkillAegis Editor**: The scenario builder to create new training exercises.
+2. **SkillAegis Dashboard**: Start a training session and keep track of participants' progress in real-time.
+
 ## Usage
+1. Start the main web server
+```bash
+python3 SkillAegis.sh
+```
 
-1. **Create Scenarios**: Use the scenario builder to create new training exercises.
-2. **Run Exercises**: Start a new session from the dashboard.
-3. **Monitor Progress**: Keep track of participants' performance and progress in real-time.
+## SkillAegis Editor
+The **Edditor** can be used to design or edit scenario.
 
-## Live Dashboard
-
-SkillAegis includes a powerful live dashboard that provides:
-- **Real-time Metrics**: Track key performance indicators.
-- **Participant Overview**: View individual and group progress.
-- **Customizable Reports**: Generate detailed reports for further analysis.
+## SkillAegis Dashboard
+The **Dashboard** can be used to run a training session and visualize the progress of participants in real-time
 
 ## Contributing
 
@@ -58,15 +64,4 @@ We welcome contributions from the community. To contribute:
     git push origin feature/your-feature-name
     ```
 5. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions or feedback, please reach out to us at support@skillaegis.com.
-
----
-
-Thank you for using SkillAegis! We hope it helps you achieve your training goals effectively.
+.
