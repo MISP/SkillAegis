@@ -10,17 +10,33 @@
     <div id="app">
       <div style="display: flex; flex-direction: column; align-items: center;">
         <span id="logo"></span>
-        <span style="margin-top: 1rem; font-size: 2rem;">SkillAegis</span>
+        <span id="logo-text"></span>
       </div>
 
-      <div style="margin-top: 3rem; display: flex; flex-direction: row; align-items: center; gap: 1rem;">
-        <a href="{{url_dashboard}}" class="card">
-          <span>Live Exercise Dashboard</span>
+      <div style="margin-top: 3rem; display: flex; flex-direction: row; align-items: center; gap: 2rem;">
+        <a href="{{url_dashboard}}" style="text-decoration: none;">
+          <div class="card">
+            <div class="content">
+              <span class="title">Live Dashboard</span>
+              <span class="text">Run a scenario and visualize the progress in real-time</span>
+            </div>
+            <div class="icon-container">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" aria-hidden="true" focusable="false" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-17.4-6.9-33.1-18.1-44.6L366 161.7c5.3-12.1-.2-26.3-12.3-31.6s-26.3 .2-31.6 12.3L257.9 288c-.6 0-1.3 0-1.9 0c-35.3 0-64 28.7-64 64s28.7 64 64 64zM176 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM96 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm352-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
+            </div>
+          </div>
         </a>
-        <a href="{{url_editor}}" class="card">
-          <span>Scenario Editor</span>
-        </a>
-      </div>
+        <a href="{{url_editor}}" style="text-decoration: none;">
+          <div class="card">
+            <div class="content">
+              <span class="title">Scenario Editor</span>
+              <span class="text">Design and test scenarios</span>
+            </div>
+            <div class="icon-container">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" aria-hidden="true" focusable="false" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"/></svg>
+            </div>
+          </div>
+          </a>
+        </div>
   </body>
 </html>
 
@@ -30,7 +46,7 @@
     min-height: 100%;
     background-color: #374151;
     display: flex;
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Roboto, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
   #app {
@@ -41,7 +57,7 @@
     padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    color: rgb(148, 163, 184);
+    color: #94a3b8;
   }
 
   #logo {
@@ -52,13 +68,24 @@
     background-size: 160px;
   }
 
+  #logo-text {
+    margin-top: 1rem;
+    width: 147px;
+    height: 32px;
+    display: block;
+    background-repeat: no-repeat;
+    background-size: initial;
+    background-image: url(skillaegis-text.svg);
+    /* Forces color #94a3b8 */
+    filter: invert(72%) sepia(6%) saturate(998%) hue-rotate(176deg) brightness(90%) contrast(84%);
+  }
+
   .card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 2rem;
-    height: 4rem;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
     width: 16rem;
+    height: 16rem;
     border: 1px solid #334155;
     border-radius: 0.5em;
     background-color: #475569;
@@ -66,23 +93,98 @@
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
-    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   .card:hover {
-    background-color: #64748b;
-    --tw-translate-x: 0;
-    --tw-translate-y: -4px;
-    --tw-scale-x: 1.02;
-    --tw-scale-y: 1.02;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    background-color: #556376;
+    --app-translate-x: 0;
+    --app-translate-y: -4px;
+    --app-scale-x: 1.02;
+    --app-scale-y: 1.02;
+    transform: translate(var(--app-translate-x), var(--app-translate-y)) scaleX(var(--app-scale-x)) scaleY(var(--app-scale-y));
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 8px;
   }
 
-  .card > span {
-    color: #f1f5f9;
+  .card > .content {
+    display: flex;
+    height: 100%;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
+  .card .content > * {
+    z-index: 10;
+  }
+
+  .content > .title {
+    margin-top: 1.5rem;
+    color: #f7f7f7;
     text-wrap: nowrap;
+    text-transform: uppercase;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.1, 1.03);
+    transition-duration: 350ms;
+    --app-translate-y: 2.5rem;
+    text-shadow: #12161d78 0px 1px 3px;
+    transform: translate(0, var(--app-translate-y));
   }
 
+  .card:hover .content > .title {
+    --app-scale-y: 0.8;
+    --app-scale-x: 0.8;
+    transform: translate(0, 0) scaleX(var(--app-scale-x)) scaleY(var(--app-scale-y));
+    text-shadow: #12161d 0px 2px 3px;
+  }
+
+  .content > .text {
+    margin-top: 1em;
+    color: #f4f4f4;
+    font-weight: 400;
+    font-size: 1.2em;
+    text-wrap: wrap;
+    text-align: center;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 350ms;
+    --app-translate-x: -10px;
+    opacity: 0;
+    transform: translate3d(var(--app-translate-x), 0, 0);
+    text-shadow: #12161d 0px 2px 3px;
+  }
+
+  .card:hover .content > .text {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+
+  .icon-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .icon {
+    vertical-align: -0.125em;
+    margin: 2em;
+    fill: #22d3ee;
+    opacity: 0.2;
+     transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .card:hover .icon {
+    opacity: 0.7;
+  }
 </style>

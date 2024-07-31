@@ -4,13 +4,13 @@ import http.server
 import socketserver
 import os
 
-HOST = ""
+HOST = "0.0.0.0"
 PORT = 8001
 
 DASHBOARD_URL=""
 EDITOR_URL=""
 
-class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
+class MyHttpRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         global DASHBOARD_URL, EDITOR_URL
 
@@ -44,8 +44,27 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
                     self.wfile.write(file.read())
             else:
                 self.send_error(404, "File not found")
+        elif self.path == '/skillaegis-text.svg':
+            image_path = 'application/skillaegis-text.svg'
+            if os.path.exists(image_path):
+                self.send_response(200)
+                self.send_header("Content-type", "image/svg+xml")
+                self.end_headers()
+                with open(image_path, 'rb') as file:
+                    self.wfile.write(file.read())
+            else:
+                self.send_error(404, "File not found")
+        elif self.path.startswith('/assets/'):
+            font_path = 'application/assets/' + self.path[8:]
+            if os.path.exists(font_path):
+                self.send_response(200)
+                self.end_headers()
+                with open(font_path, 'rb') as file:
+                    self.wfile.write(file.read())
+            else:
+                self.send_error(404, "File not found")
         else:
-            return http.server.SimpleHTTPRequestHandler.do_GET(self)
+            self.send_response(404, "Not found")
 
 
 def main():
@@ -69,12 +88,11 @@ def main():
     else:
         EDITOR_URL = args.editor_url
 
-    Handler = MyHttpRequestHandler
+    print(f'Serving main server on {args.host}:{args.port}')
+    print(f'Access the application here: http://127.0.0.1:{args.port}')
+    server = http.server.ThreadingHTTPServer((args.host, args.port), MyHttpRequestHandler)
+    server.serve_forever()
 
-    with socketserver.TCPServer((args.host, args.port), Handler) as httpd:
-        print(f'Serving main server on {args.host}:{args.port}')
-        print(f'Access the application here: http://127.0.0.1:{args.port}')
-        httpd.serve_forever()
 
 if __name__ == '__main__':
     main()
