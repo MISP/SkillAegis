@@ -55,8 +55,7 @@
         "followed_by": [
           "be1c3d25-e0df-4492-bdc1-f2e825194ef3"
         ],
-        "trigger": [
-        ]
+        "trigger": []
       },
       "timing": {
         "triggered_at": null
@@ -78,8 +77,7 @@
         "followed_by": [
           "cf149a8c-5601-4eec-aea3-5142170d309b"
         ],
-        "trigger": [
-        ]
+        "trigger": []
       },
       "timing": {
         "triggered_at": null
@@ -101,8 +99,7 @@
         "followed_by": [
           "b4a8c490-4f0a-4a33-bee1-044b9f659e83"
         ],
-        "trigger": [
-        ]
+        "trigger": []
       },
       "timing": {
         "triggered_at": null
@@ -121,16 +118,15 @@
           "time_expiration",
           "completion"
         ],
-        "trigger": [
-        ]
+        "followed_by": [],
+        "trigger": []
       },
       "timing": {
         "triggered_at": null
       }
     }
   ],
-  "inject_payloads": [
-  ],
+  "inject_payloads": [],
   "injects": [
     {
       "action": "event_creation",

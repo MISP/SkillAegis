@@ -177,6 +177,7 @@
           "time_expiration",
           "completion"
         ],
+        "followed_by": [],
         "trigger": []
       },
       "timing": {
