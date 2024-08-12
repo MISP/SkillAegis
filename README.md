@@ -26,7 +26,12 @@ To get started with SkillAegis, follow these steps:
     ```bash
     git submodule update --init --recursive
     ```
-4. Install the submodule dependencies
+4. Clone the configuration file
+    ```bash
+    cp config.json.sample config.json
+    ```
+    -   [optional] Update the configuration
+5. Install the submodule dependencies
    ```bash
    # Editor
    pushd SkillAegis-Editor
@@ -42,7 +47,7 @@ To get started with SkillAegis, follow these steps:
    pip3 install -r requirements.txt
    popd
    ```
-5. Start the project
+6. Start the project
    ```bash
    bash SkillAegis.sh
    ```
