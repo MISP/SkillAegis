@@ -56,9 +56,9 @@ To get started with SkillAegis, follow these steps:
 
 The project is composed of three applications:
 
-1. **SkillAegis**: The main application that configures and starts the two other projects. It also contains all created scenarios.
-2. **SkillAegis Editor**: The scenario builder to create new training exercises.
-3. **SkillAegis Dashboard**: The application to start training sessions and track participants' progress in real time.
+1. **[SkillAegis](https://github.com/MISP/SkillAegis)**: The main application that configures and starts the two other projects. It also contains all created scenarios.
+2. **[SkillAegis Editor](https://github.com/MISP/SkillAegis-Editor)**: The scenario builder to create new training exercises.
+3. **[SkillAegis Dashboard](https://github.com/MISP/SkillAegis-Dashboard)**: The application to start training sessions and track participants' progress in real time.
 
 
 ## SkillAegis
