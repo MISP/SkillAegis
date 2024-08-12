@@ -65,26 +65,26 @@ SkillAegis is the primary application that configures, launches the two other pr
 ## SkillAegis Editor
 The **Editor** can be used to design or edit scenario.
 
-*List of all available scenarios*
 ![SkillAegis Editor Scenario Index](./docs/SkillAegis-Editor_index.png)
+*List of all available scenarios*
 
-*While designing a scenario, you can create multiple injects, specify their execution order, outline any requirements for each, and define the criteria for evaluating and marking them as complete.*
 ![SkillAegis Editor Scenario Designer](./docs/SkillAegis-Editor_designer.png)
+*While designing a scenario, you can create multiple injects, specify their execution order, outline any requirements for each, and define the criteria for evaluating and marking them as complete.*
 
-*Writing evaluations for injects can be challenging, so the inject tester is provided to streamline this process.*
 ![SkillAegis Editor Inject Tester](./docs/SkillAegis-Editor_inject-tester.png)
+*Writing evaluations for injects can be challenging, so the inject tester is provided to streamline this process.*
 
 ## SkillAegis Dashboard
 The **Dashboard** can be used to run a training session and visualize the progress of participants in real-time.
 
-*Short demo of SkillAegis-Dashboard: Once the application starts, the user selects an exercise. From that point, the application tracks the real-time progression of each players.*
 ![SkillAegis Dashboard Active Exercises](./docs/SkillAegis-Dashboard-recording.gif)
+*Short demo of SkillAegis-Dashboard: Once the application starts, the user selects an exercise. From that point, the application tracks the real-time progression of each players.*
 
-*On the dashboard main page, you can monitor the progress of all participants for the selected exercise and view real-time logs of their activity feed.*
 ![SkillAegis Dashboard Active Exercises](./docs/SkillAegis-Dashboard_main.png)
+*On the dashboard main page, you can monitor the progress of all participants for the selected exercise and view real-time logs of their activity feed.*
 
-*The fullscreen view provides an overview of the status of all users in a single, easily accessible display.*
 ![SkillAegis Dashboard Fullscreen](./docs/SkillAegis-Dashboard_fullscreen.png)
+*The fullscreen view provides an overview of the status of all users in a single, easily accessible display.*
 
 
 ## Scenario format
@@ -112,7 +112,9 @@ The [format description](https://github.com/MISP/cexf/blob/main/format-descripti
     "uuid": "75d7460-af9d-4098-8ad1-754457076b32",
     "valid_until": "20310611",
     "version": "20210611"
-  }
+  },
+  "inject_flow": [...],
+  "injects": [...],
 }
 ```
 
