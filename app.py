@@ -9,16 +9,20 @@ PORT = 8001
 
 DASHBOARD_URL=""
 EDITOR_URL=""
+VERSION="1.0.0"
 
 class MyHttpRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        global DASHBOARD_URL, EDITOR_URL
+        global DASHBOARD_URL, EDITOR_URL, VERSION
 
         if self.path == '/':
             self.path = 'application/welcome.html'
             with open(self.path, 'r') as file:
                 html = file.read()
-                html = html.replace('{{url_dashboard}}', DASHBOARD_URL).replace('{{url_editor}}', EDITOR_URL)
+                html = html \
+                    .replace('{{url_dashboard}}', DASHBOARD_URL) \
+                    .replace('{{url_editor}}', EDITOR_URL) \
+                    .replace('{{version}}', VERSION)
                 # Write the modified HTML to the response
                 self.send_response(200)
                 self.send_header("Content-type", "text/html")
