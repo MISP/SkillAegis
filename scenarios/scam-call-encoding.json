@@ -1,558 +1,530 @@
 {
-    "exercise": {
-      "description": "MISP Encoding Exercise : Scam Call",
-      "expanded": "MISP Encoding Exercise : Scam Call",
-      "meta": {
-        "author": "MISP Project",
-        "level": "beginner",
-        "priority": 5
-      },
-      "name": "MISP Encoding Exercise : Scam Call",
-      "namespace": "data-model",
-      "tags": [
-        "exercise:software-scope=\"misp\"",
-        "state:production"
-      ],
-      "total_duration": "7200",
-      "uuid": "6c61b3a5-a760-4bac-be23-de97af397c2f",
-      "version": "20240702"
+  "exercise": {
+    "description": "MISP Encoding Exercise : Scam Call",
+    "expanded": "MISP Encoding Exercise : Scam Call",
+    "meta": {
+      "author": "MISP Project",
+      "level": "beginner",
+      "priority": 5
     },
-    "inject_flow": [
-      {
-        "description": "event-creation",
-        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd",
-        "reporting_callback": [],
-        "requirements": {},
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-            "startex"
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "IP-address",
-        "inject_uuid": "cdf465dc-a859-43ed-b782-510427cfb451",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "malicious-payload",
-        "inject_uuid": "79c8a538-28de-4edf-b0e2-253c59cbb973",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "Download URL",
-        "inject_uuid": "60c6cfcc-99be-4b98-9eb7-e0a3e77bb449",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "IBAN Number",
-        "inject_uuid": "ab32278b-a8e4-4539-8c1b-f262a2706ca8",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "Phone Number",
-        "inject_uuid": "ee4a684e-2648-419a-bd65-29ab219660c4",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "Person",
-        "inject_uuid": "14d11e1b-6609-47d5-9867-91996f432f34",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "Contextualization",
-        "inject_uuid": "4c242d49-fcf7-4c76-974b-6d5983c0eff9",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      },
-      {
-        "description": "Published",
-        "inject_uuid": "68cc60ff-e659-4589-88e5-7490fa4e1dfa",
-        "reporting_callback": [],
-        "requirements": {
-          "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
-        },
-        "sequence": {
-          "completion_trigger": [
-            "time_expiration",
-            "completion"
-          ],
-          "followed_by": [
-          ],
-          "trigger": [
-          ]
-        },
-        "timing": {
-          "triggered_at": null
-        }
-      }
+    "name": "MISP Encoding Exercise : Scam Call",
+    "namespace": "data-model",
+    "tags": [
+      "exercise:software-scope=\"misp\"",
+      "state:production"
     ],
-    "inject_payloads": [
-    ],
-    "injects": [
-      {
-        "action": "event-creation",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              }
-            ],
-            "result": "MISP Event created",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              10
-            ]
-          }
+    "total_duration": "7200",
+    "uuid": "6c61b3a5-a760-4bac-be23-de97af397c2f",
+    "version": "20240702"
+  },
+  "inject_flow": [
+    {
+      "description": "event-creation",
+      "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd",
+      "reporting_callback": [],
+      "requirements": {},
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
         ],
-        "name": "Event Creation",
-        "target_tool": "MISP",
-        "uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+        "followed_by": [],
+        "trigger": [
+          "startex"
+        ]
       },
-      {
-        "action": "ip-address",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value == \"194.78.89.250\").to_ids": {
-                  "extract_type": "all",
-                  "comparison": "contains",
-                  "values": [
-                      true,
-                      1
-                  ]
-                }
-              }
-            ],
-            "result": "IP Address added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "IP Address",
-        "target_tool": "MISP",
-        "uuid": "cdf465dc-a859-43ed-b782-510427cfb451"
-      },
-      {
-        "action": "malware-sample",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                ".Event.Object[].Attribute[] | select((.type == \"sha1\")).value": {
-                  "extract_type": "all",
-                  "comparison": "equals",
-                  "values": [
-                    "04d496d39bc9409bfdabdeb07002b97093b58f77"
-                  ]
-                }
-              }
-            ],
-            "result": "Malware sample added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "Malware sample",
-        "target_tool": "MISP",
-        "uuid": "79c8a538-28de-4edf-b0e2-253c59cbb973"
-      },
-      {
-        "action": "url",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                ".Event.Object[].Attribute[] | select((.type == \"url\")).value": {
-                  "extract_type": "all",
-                  "comparison": "equals",
-                  "values": [
-                    "https://zdgyot.ugic0k.ru/assets/bin.exe"
-                  ]
-                }
-              },
-              {
-                ".Event.Object[].Attribute[] | select((.type == \"domain\") or (.type == \"hostname\")).value": {
-                  "extract_type": "all",
-                  "comparison": "equals",
-                  "values": [
-                    "zdgyot.ugic0k.ru"
-                  ]
-                }
-              }
-            ],
-            "result": "Download URL added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "Download URL",
-        "target_tool": "MISP",
-        "uuid": "60c6cfcc-99be-4b98-9eb7-e0a3e77bb449"
-      },
-      {
-        "action": "iban",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"iban\")).value": {
-                  "extract_type": "all",
-                  "comparison": "contains",
-                  "values": [
-                      "GB29NWBK60161331926819"
-                  ]
-                }
-              }
-            ],
-            "result": "IBAN Number added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "IBAN Number",
-        "target_tool": "MISP",
-        "uuid": "ab32278b-a8e4-4539-8c1b-f262a2706ca8"
-      },
-      {
-        "action": "phone",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"phone-number\")).value": {
-                  "extract_type": "all",
-                  "comparison": "contains-regex",
-                  "values": [
-                      "\\+?12243359185"
-                  ]
-                }
-              }
-            ],
-            "result": "Phone Number added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "Phone Number",
-        "target_tool": "MISP",
-        "uuid": "ee4a684e-2648-419a-bd65-29ab219660c4"
-      },
-      {
-        "action": "person",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                ".Event.Object[] | select((.name == \"person\")).distribution": {
-                  "comparison": "equals_any",
-                  "values": [
-                    "0",
-                    "1",
-                    "4"
-                  ]
-                }
-              }
-            ],
-            "result": "Person added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "Person",
-        "target_tool": "MISP",
-        "uuid": "14d11e1b-6609-47d5-9867-91996f432f34"
-      },
-      {
-        "action": "context",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                ".Event.Tag | select(length > 0) | .[].name": {
-                  "extract_type": "all",
-                  "comparison": "count",
-                  "values": [
-                    ">=3"
-                  ]
-                }
-              }
-            ],
-            "result": "Context added",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "Contextualization",
-        "target_tool": "MISP",
-        "uuid": "4c242d49-fcf7-4c76-974b-6d5983c0eff9"
-      },
-      {
-        "action": "published",
-        "inject_evaluation": [
-          {
-            "parameters": [
-              {
-                ".Event.info": {
-                  "comparison": "contains",
-                  "values": [
-                    "scam",
-                    "call"
-                  ]
-                }
-              },
-              {
-                ".Event.published": {
-                  "comparison": "equals",
-                  "values": [
-                    "1"
-                  ]
-                }
-              }
-            ],
-            "result": "Event published",
-            "evaluation_strategy": "data_filtering",
-            "evaluation_context": {
-            },
-            "score_range": [
-              0,
-              20
-            ]
-          }
-        ],
-        "name": "Published",
-        "target_tool": "MISP",
-        "uuid": "68cc60ff-e659-4589-88e5-7490fa4e1dfa"
+      "timing": {
+        "triggered_at": null
       }
-    ]
-  }
-  
+    },
+    {
+      "description": "IP-address",
+      "inject_uuid": "cdf465dc-a859-43ed-b782-510427cfb451",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "malicious-payload",
+      "inject_uuid": "79c8a538-28de-4edf-b0e2-253c59cbb973",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Download URL",
+      "inject_uuid": "60c6cfcc-99be-4b98-9eb7-e0a3e77bb449",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "IBAN Number",
+      "inject_uuid": "ab32278b-a8e4-4539-8c1b-f262a2706ca8",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Phone Number",
+      "inject_uuid": "ee4a684e-2648-419a-bd65-29ab219660c4",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Person",
+      "inject_uuid": "14d11e1b-6609-47d5-9867-91996f432f34",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Contextualization",
+      "inject_uuid": "4c242d49-fcf7-4c76-974b-6d5983c0eff9",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    },
+    {
+      "description": "Published",
+      "inject_uuid": "68cc60ff-e659-4589-88e5-7490fa4e1dfa",
+      "reporting_callback": [],
+      "requirements": {
+        "inject_uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+      },
+      "sequence": {
+        "completion_trigger": [
+          "time_expiration",
+          "completion"
+        ],
+        "followed_by": [],
+        "trigger": []
+      },
+      "timing": {
+        "triggered_at": null
+      }
+    }
+  ],
+  "inject_payloads": [],
+  "injects": [
+    {
+      "action": "event-creation",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            }
+          ],
+          "result": "MISP Event created",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            10
+          ]
+        }
+      ],
+      "name": "Event Creation",
+      "target_tool": "MISP",
+      "uuid": "de9f4c9b-dc97-4e84-85f3-859f30d3a3cd"
+    },
+    {
+      "action": "ip-address",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value == \"194.78.89.250\").to_ids": {
+                "extract_type": "all",
+                "comparison": "contains",
+                "values": [
+                  true,
+                  1
+                ]
+              }
+            }
+          ],
+          "result": "IP Address added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "IP Address",
+      "target_tool": "MISP",
+      "uuid": "cdf465dc-a859-43ed-b782-510427cfb451"
+    },
+    {
+      "action": "malware-sample",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              ".Event.Object[].Attribute[] | select((.type == \"sha1\")).value": {
+                "extract_type": "all",
+                "comparison": "equals",
+                "values": [
+                  "04d496d39bc9409bfdabdeb07002b97093b58f77"
+                ]
+              }
+            }
+          ],
+          "result": "Malware sample added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Malware sample",
+      "target_tool": "MISP",
+      "uuid": "79c8a538-28de-4edf-b0e2-253c59cbb973"
+    },
+    {
+      "action": "url",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              ".Event.Object[].Attribute[] | select((.type == \"url\")).value": {
+                "extract_type": "all",
+                "comparison": "equals",
+                "values": [
+                  "https://zdgyot.ugic0k.ru/assets/bin.exe"
+                ]
+              }
+            },
+            {
+              ".Event.Object[].Attribute[] | select((.type == \"domain\") or (.type == \"hostname\")).value": {
+                "extract_type": "all",
+                "comparison": "equals",
+                "values": [
+                  "zdgyot.ugic0k.ru"
+                ]
+              }
+            }
+          ],
+          "result": "Download URL added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Download URL",
+      "target_tool": "MISP",
+      "uuid": "60c6cfcc-99be-4b98-9eb7-e0a3e77bb449"
+    },
+    {
+      "action": "iban",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"iban\")).value": {
+                "extract_type": "all",
+                "comparison": "contains",
+                "values": [
+                  "GB29NWBK60161331926819"
+                ]
+              }
+            }
+          ],
+          "result": "IBAN Number added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "IBAN Number",
+      "target_tool": "MISP",
+      "uuid": "ab32278b-a8e4-4539-8c1b-f262a2706ca8"
+    },
+    {
+      "action": "phone",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"phone-number\")).value": {
+                "extract_type": "all",
+                "comparison": "contains-regex",
+                "values": [
+                  "\\+?12243359185"
+                ]
+              }
+            }
+          ],
+          "result": "Phone Number added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Phone Number",
+      "target_tool": "MISP",
+      "uuid": "ee4a684e-2648-419a-bd65-29ab219660c4"
+    },
+    {
+      "action": "person",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              ".Event.Object[] | select((.name == \"person\")).distribution": {
+                "comparison": "equals_any",
+                "values": [
+                  "0",
+                  "1",
+                  "4"
+                ]
+              }
+            }
+          ],
+          "result": "Person added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Person",
+      "target_tool": "MISP",
+      "uuid": "14d11e1b-6609-47d5-9867-91996f432f34"
+    },
+    {
+      "action": "context",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              ".Event.Tag | select(length > 0) | .[].name": {
+                "extract_type": "all",
+                "comparison": "count",
+                "values": [
+                  ">=3"
+                ]
+              }
+            }
+          ],
+          "result": "Context added",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Contextualization",
+      "target_tool": "MISP",
+      "uuid": "4c242d49-fcf7-4c76-974b-6d5983c0eff9"
+    },
+    {
+      "action": "published",
+      "inject_evaluation": [
+        {
+          "parameters": [
+            {
+              ".Event.info": {
+                "comparison": "contains",
+                "values": [
+                  "scam",
+                  "call"
+                ]
+              }
+            },
+            {
+              ".Event.published": {
+                "comparison": "equals",
+                "values": [
+                  "1"
+                ]
+              }
+            }
+          ],
+          "result": "Event published",
+          "evaluation_strategy": "data_filtering",
+          "evaluation_context": {},
+          "score_range": [
+            0,
+            20
+          ]
+        }
+      ],
+      "name": "Published",
+      "target_tool": "MISP",
+      "uuid": "68cc60ff-e659-4589-88e5-7490fa4e1dfa"
+    }
+  ]
+}

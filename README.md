@@ -41,7 +41,7 @@ python3 SkillAegis.sh
 ```
 
 ## SkillAegis Editor
-The **Edditor** can be used to design or edit scenario.
+The **Editor** can be used to design or edit scenario.
 
 ## SkillAegis Dashboard
 The **Dashboard** can be used to run a training session and visualize the progress of participants in real-time
