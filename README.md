@@ -143,3 +143,11 @@ We welcome contributions from the community. To contribute:
     ```
 5. Open a pull request.
 .
+
+# License
+This software is licensed under GNU Affero General Public License version 3
+
+```
+Copyright (c) 2024 Sami Mokaddem
+Copyright (c) 2024 CIRCL - Computer Incident Response Center Luxembourg
+```
