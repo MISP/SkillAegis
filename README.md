@@ -38,6 +38,8 @@ To get started with SkillAegis, follow these steps:
    python3 -m venv venv
    source venv/bin/activate
    pip3 install -r requirements.txt
+   cp config.py.sample config.py
+   # [recommended] Update the configuration's MISP part
    deactivate
    popd
 
@@ -46,6 +48,8 @@ To get started with SkillAegis, follow these steps:
    python3 -m venv venv
    source venv/bin/activate
    pip3 install -r requirements.txt
+   cp config.py.sample config.py
+   # [recommended] Update the configuration
    deactivate
    popd
    ```
@@ -53,6 +57,19 @@ To get started with SkillAegis, follow these steps:
    ```bash
    bash SkillAegis.sh
    ```
+
+## Update
+
+To update the project, follow these steps:
+
+1. Pull the latest changes
+    ```bash
+    git pull
+    ```
+2. Pull the latest changes for all submodules
+    ```bash
+    git submodule update --recursive
+    ```
 
 # Project Structure
 
