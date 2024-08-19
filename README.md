@@ -38,6 +38,7 @@ To get started with SkillAegis, follow these steps:
    python3 -m venv venv
    source venv/bin/activate
    pip3 install -r requirements.txt
+   deactivate
    popd
 
    # Dashboard
@@ -45,6 +46,7 @@ To get started with SkillAegis, follow these steps:
    python3 -m venv venv
    source venv/bin/activate
    pip3 install -r requirements.txt
+   deactivate
    popd
    ```
 6. Start the project
