@@ -1,0 +1,46 @@
+services:
+    skillaegis-main:
+        build:
+            context: .
+        container_name: skillaegis-main
+        image: skillaegis/main:latest
+        working_dir: /app
+        environment:
+            - SKILLAEGIS_HOST=0.0.0.0
+            - SKILLAEGIS_PORT=4000
+            - SKILLAEGIS_DASHBOARD_URL=http://localhost:4001
+            - SKILLAEGIS_EDITOR_URL=http://localhost:4002
+        volumes:
+            - ./scenarios:/app/scenarios
+        ports:
+            - "4000:4000"
+
+    skillaegis-dashboard:
+        build:
+            context: ./SkillAegis-Dashboard
+        container_name: skillaegis-dashboard
+        image: skillaegis/dashboard:latest
+        working_dir: /app
+        environment:
+            - SKILLAEGIS_HOST=0.0.0.0
+            - SKILLAEGIS_PORT=4001
+            - SKILLAEGIS_EXERCISE_FOLDER=scenarios
+        volumes:
+            - ./scenarios:/app/scenarios
+        ports:
+            - "4001:4001"
+
+    skillaegis-editor:
+        build:
+            context: ./SkillAegis-Editor
+        container_name: skillaegis-editor
+        image: skillaegis/editor:latest
+        working_dir: /app
+        environment:
+            - SKILLAEGIS_HOST=0.0.0.0
+            - SKILLAEGIS_PORT=4002
+            - SKILLAEGIS_EXERCISE_FOLDER=scenarios
+        volumes:
+            - ./scenarios:/app/scenarios
+        ports:
+            - "4002:4002"

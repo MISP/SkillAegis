@@ -74,11 +74,13 @@ class MyHttpRequestHandler(http.server.BaseHTTPRequestHandler):
 def main():
     global DASHBOARD_URL, EDITOR_URL
     parser = argparse.ArgumentParser(description='Parse command-line arguments for SkillAegis Dashboard.')
+    print(os.getenv("SKILLAEGIS_DASHBOARD_URL", '#'))
+    print(os.getenv("SKILLAEGIS_EDITOR_URL", '#'))
 
-    parser.add_argument('--dashboard_url', type=str, required=True, help='The URL of the dashboard application')
-    parser.add_argument('--editor_url', type=str, required=True, help='The URL of the editor application')
-    parser.add_argument('--host', type=str, required=False, default=HOST, help='The host to listen to')
-    parser.add_argument('--port', type=int, required=False, default=PORT, help='The port to listen to')
+    parser.add_argument('--dashboard_url', type=str, required=False, default=os.getenv("SKILLAEGIS_DASHBOARD_URL", '#'), help='The URL of the dashboard application')
+    parser.add_argument('--editor_url', type=str, required=False, default=os.getenv("SKILLAEGIS_EDITOR_URL", '#'), help='The URL of the editor application')
+    parser.add_argument('--host', type=str, required=False, default=os.getenv("SKILLAEGIS_HOST", HOST), help='The host to listen to')
+    parser.add_argument('--port', type=int, required=False, default=os.getenv("SKILLAEGIS_PORT", PORT), help='The port to listen to')
 
     args = parser.parse_args()
 
