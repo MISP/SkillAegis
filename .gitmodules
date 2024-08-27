@@ -1,6 +1,6 @@
 [submodule "SkillAegis-Dashboard"]
 	path = SkillAegis-Dashboard
-	url = git@github.com:MISP/SkillAegis-Dashboard.git
+	url = https://github.com/MISP/SkillAegis-Dashboard.git
 [submodule "SkillAegis-Editor"]
 	path = SkillAegis-Editor
-	url = git@github.com:MISP/SkillAegis-Editor.git
+	url = https://github.com/MISP/SkillAegis-Editor.git
