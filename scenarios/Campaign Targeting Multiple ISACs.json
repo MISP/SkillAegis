@@ -391,11 +391,11 @@
                             }
                         },
                         {
-                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value | match(\"HKCU.+SOFTWARE.+MSCall.\"))": {
                                 "extract_type": "all",
-                                "comparison": "contains-regex",
+                                "comparison": "count",
                                 "values": [
-                                    "HKCU.+SOFTWARE.+MSCall.*"
+                                    ">=1"
                                 ]
                             }
                         }
