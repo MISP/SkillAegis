@@ -1,0 +1,488 @@
+{
+    "exercise": {
+        "name": "Campaign Targeting Multiple ISACs",
+        "namespace": "misp-only",
+        "description": "Campaign Targeting Multiple ISACs",
+        "meta": {
+            "author": "MISP Project",
+            "level": "advanced",
+            "priority": 10
+        },
+        "uuid": "0469e4eb-198a-4284-beaf-3a7c1ab9edb5",
+        "version": "202492"
+    },
+    "inject_flow": [
+        {
+            "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016",
+            "description": "",
+            "requirements": {},
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "startex"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "5d0d5bf6-29da-4b55-9b15-cd670127c3fb",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "ff78a757-acd2-48a7-b366-464ca26a5c06",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "1d271cdc-7d04-48ef-ba44-64bf03e38590",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "b9dee9bd-c5e5-41ae-8c5c-a5f021ee8f6c",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "fc9f326a-58ba-4580-b768-f1d6588097ef",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "0af5d8f0-0158-4834-b458-f0562ebed286",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "95968bf2-0350-4f68-984e-cac18ec614fd",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "d1d04daf-83ec-4583-89de-3bdab6b2a06a",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        }
+    ],
+    "inject_payloads": [],
+    "injects": [
+        {
+            "name": "Event Creation",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "dc309d12-e84a-4d5d-9be0-24a13b958016",
+            "description": "Ensure the event is created",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "event created",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Phishing Domains",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "5d0d5bf6-29da-4b55-9b15-cd670127c3fb",
+            "description": "The two phishing domains",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "secure-pay.com",
+                                    "secure-book.com"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "IP Addresses",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "ff78a757-acd2-48a7-b366-464ca26a5c06",
+            "description": "C2 server and phishing sites",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "195.208.152.43",
+                                    "80.72.225.30"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "4 C2 Domain Name",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "1d271cdc-7d04-48ef-ba44-64bf03e38590",
+            "description": "At least 4 C2 Domain names",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value | match(\"https://c2.[a-z]{6}.deadnxuyla.ru\"))": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=4"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Malicious Payload",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "b9dee9bd-c5e5-41ae-8c5c-a5f021ee8f6c",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[].Attribute[] | select(.type == \"sha1\") | .value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "82b3bd7206da9a0a949d48d1ce92c7f05dfbe230"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Backdoor added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "IDS Rule",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "fc9f326a-58ba-4580-b768-f1d6588097ef",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select(.name == \"suricata\")": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=1"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "uuid": "0af5d8f0-0158-4834-b458-f0562ebed286",
+            "target_tool": "MISP",
+            "name": "Registry Keys",
+            "action": "",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains-regex",
+                                "values": [
+                                    "HKCU.+SOFTWARE.+MSCall.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "description": "The registry key"
+        },
+        {
+            "uuid": "95968bf2-0350-4f68-984e-cac18ec614fd",
+            "target_tool": "MISP",
+            "name": "Phishing Email",
+            "action": "",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select(.name == \"email\")": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "uuid": "d1d04daf-83ec-4583-89de-3bdab6b2a06a",
+            "target_tool": "MISP",
+            "name": "Symmetric Key",
+            "action": "",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value | match(\"(0x)?281A77EA\"))": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "description": "The XOR Key"
+        }
+    ]
+}
