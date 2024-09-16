@@ -14,24 +14,28 @@
 
 To get started with SkillAegis, follow these steps:
 
-1. Clone the repository:
+0. Ensure Python **3.10** or higher is installed.
+    ```bash
+    python -V
+    ```
+2. Clone the repository:
     ```bash
     git clone https://github.com/MISP/SkillAegis.git
     ```
-2. Navigate to the project directory:
+3. Navigate to the project directory:
     ```bash
     cd SkillAegis
     ```
-3. Initialize the submodules
+4. Initialize the submodules
     ```bash
     git submodule update --init --recursive
     ```
-4. Clone the configuration file
+5. Clone the configuration file
     ```bash
     cp config.json.sample config.json
     ```
     -   [optional] Update the configuration
-5. Install the submodule dependencies
+6. Install the submodule dependencies
    ```bash
    # Editor
    pushd SkillAegis-Editor
@@ -53,7 +57,7 @@ To get started with SkillAegis, follow these steps:
    deactivate
    popd
    ```
-6. Start the project
+7. Start the project
    ```bash
    bash SkillAegis.sh
    ```
