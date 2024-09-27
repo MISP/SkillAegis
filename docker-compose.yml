@@ -25,6 +25,9 @@ services:
             - SKILLAEGIS_HOST=0.0.0.0
             - SKILLAEGIS_PORT=4001
             - SKILLAEGIS_EXERCISE_FOLDER=scenarios
+            - SKILLAEGIS_MISP_URL=https://localhost/
+            - SKILLAEGIS_MISP_APIKEY=FI4gCRghRZvLVjlLPLTFZ852x2njkkgPSz0zQ3E0
+            - SKILLAEGIS_MISP_SKIPSSL=true
         volumes:
             - ./scenarios:/app/scenarios
         ports:
