@@ -1,0 +1,162 @@
+{
+    "exercise": {
+        "name": "Protect the network!",
+        "namespace": "suricata",
+        "description": "Encode IoCs in MISP to protect the infrastructure.",
+        "meta": {
+            "author": "MISP Project",
+            "level": "advanced",
+            "priority": 10
+        },
+        "uuid": "15024065-dfb6-4bda-bea9-20e0e1abcaf4",
+        "version": "202492"
+    },
+    "inject_flow": [
+        {
+            "inject_uuid": "31be00f0-65ad-4d78-bf19-7a3895fc6363",
+            "description": "",
+            "requirements": {},
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "manual",
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "4c42312a-209c-478f-baf7-962a09005c23",
+            "description": "",
+            "requirements": {},
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": 1800,
+                "periodic_run_every": 5
+            }
+        }
+    ],
+    "inject_payloads": [],
+    "injects": [
+        {
+            "name": "Event Creation",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "31be00f0-65ad-4d78-bf19-7a3895fc6363",
+            "description": "Create an Event that will contains the IoCs",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*team-[0-9]{2}.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "event created",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*team-[0-9]{2}.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "event created",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "6h",
+                                "info": "%team-%"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
+        {
+            "name": "C2 server",
+            "action": "",
+            "target_tool": "suricata",
+            "uuid": "4c42312a-209c-478f-baf7-962a09005c23",
+            "description": "Block traffic to the C2 server",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".[].verdict.action": {
+                                "comparison": "equals",
+                                "values": [
+                                    "drop"
+                                ]
+                            },
+                            ".[].dest_ip": {
+                                "comparison": "equals",
+                                "values": [
+                                    "195.208.152.43"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "IP Blocked",
+                    "evaluation_strategy": "simulate_ips",
+                    "evaluation_context": {
+                        "query_context": {
+                            "request_method": "POST",
+                            "url": "/attributes/restSearch",
+                            "payload": {
+                                "published": false,
+                                "timestamp": "1d",
+                                "returnFormat": "suricata"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        10
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        }
+    ]
+}

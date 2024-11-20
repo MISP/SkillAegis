@@ -1,470 +1,795 @@
 {
-  "exercise": {
-    "description": "MISP Encoding Exercise : Ransomware infection via e-mail",
-    "expanded": "MISP Encoding Exercise : Ransomware infection via e-mail",
-    "meta": {
-      "author": "MISP Project",
-      "level": "advanced",
-      "priority": 10
+    "exercise": {
+        "description": "MISP Encoding Exercise : Ransomware infection via e-mail",
+        "expanded": "MISP Encoding Exercise : Ransomware infection via e-mail",
+        "meta": {
+            "author": "MISP Project",
+            "level": "advanced",
+            "priority": 10
+        },
+        "name": "MISP Encoding Exercise : Ransomware infection via e-mail",
+        "namespace": "misp-only",
+        "tags": [
+            "exercise:software-scope=\"misp\"",
+            "state:production"
+        ],
+        "total_duration": "7200",
+        "uuid": "eb00428f-40b5-4da7-9402-7ce22a840659",
+        "version": "202492"
     },
-    "name": "MISP Encoding Exercise : Ransomware infection via e-mail",
-    "namespace": "data-model",
-    "tags": [
-      "exercise:software-scope=\"misp\"",
-      "state:production"
+    "inject_flow": [
+        {
+            "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae",
+            "description": "event-creation",
+            "requirements": {},
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "8f636640-e4f0-4ffb-abff-4e85597aa1bd"
+                ],
+                "trigger": [
+                    "startex",
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "8f636640-e4f0-4ffb-abff-4e85597aa1bd",
+            "description": "infection-email",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "3e61a340-0314-4622-91cc-042f3ff8543a"
+                ],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "3e61a340-0314-4622-91cc-042f3ff8543a",
+            "description": "malicious-payload",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "8a2d58c8-2b3a-4ba2-bb77-15bcfa704828"
+                ],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "8a2d58c8-2b3a-4ba2-bb77-15bcfa704828",
+            "description": "c2-ip-address",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "9df13cc8-b61b-4c9f-a1a8-66def8b64439"
+                ],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "9df13cc8-b61b-4c9f-a1a8-66def8b64439",
+            "description": "registry-keys",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "c5c03af1-7ef3-44e7-819a-6c4fd402148a"
+                ],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "c5c03af1-7ef3-44e7-819a-6c4fd402148a",
+            "description": "asym-encryption-key",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "11f6f0c2-8813-42ee-a312-136649d3f077"
+                ],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "11f6f0c2-8813-42ee-a312-136649d3f077",
+            "description": "context",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "e3ef4e5f-454a-48c8-a5d7-b3d1d25ecc9f"
+                ],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "e3ef4e5f-454a-48c8-a5d7-b3d1d25ecc9f",
+            "description": "published",
+            "requirements": {
+                "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        }
     ],
-    "total_duration": "7200",
-    "uuid": "eb00428f-40b5-4da7-9402-7ce22a840659",
-    "version": "20240624"
-  },
-  "inject_flow": [
-    {
-      "description": "event-creation",
-      "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae",
-      "reporting_callback": [],
-      "requirements": {},
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "8f636640-e4f0-4ffb-abff-4e85597aa1bd"
-        ],
-        "trigger": [
-          "startex"
-        ]
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "infection-email",
-      "inject_uuid": "8f636640-e4f0-4ffb-abff-4e85597aa1bd",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "3e61a340-0314-4622-91cc-042f3ff8543a"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "malicious-payload",
-      "inject_uuid": "3e61a340-0314-4622-91cc-042f3ff8543a",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "8a2d58c8-2b3a-4ba2-bb77-15bcfa704828"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "c2-ip-address",
-      "inject_uuid": "8a2d58c8-2b3a-4ba2-bb77-15bcfa704828",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "9df13cc8-b61b-4c9f-a1a8-66def8b64439"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "registry-keys",
-      "inject_uuid": "9df13cc8-b61b-4c9f-a1a8-66def8b64439",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "c5c03af1-7ef3-44e7-819a-6c4fd402148a"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "asym-encryption-key",
-      "inject_uuid": "c5c03af1-7ef3-44e7-819a-6c4fd402148a",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "11f6f0c2-8813-42ee-a312-136649d3f077"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "context",
-      "inject_uuid": "11f6f0c2-8813-42ee-a312-136649d3f077",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "e3ef4e5f-454a-48c8-a5d7-b3d1d25ecc9f"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "published",
-      "inject_uuid": "e3ef4e5f-454a-48c8-a5d7-b3d1d25ecc9f",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    }
-  ],
-  "inject_payloads": [],
-  "injects": [
-    {
-      "action": "event-creation",
-      "inject_evaluation": [
+    "inject_payloads": [],
+    "injects": [
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            }
-          ],
-          "result": "MISP Event created",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Event Creation",
-      "description": "Create an Event containing `ransomware`",
-      "target_tool": "MISP",
-      "uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae"
-    },
-    {
-      "action": "infection-email",
-      "inject_evaluation": [
+            "name": "Event Creation",
+            "action": "event-creation",
+            "target_tool": "MISP",
+            "uuid": "8e8dbda2-0f5e-4101-83ff-63c1ddda2cae",
+            "description": "Create an Event containing `ransomware`",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Event created",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              ".Event.Object[].Attribute[] | select(.object_relation == \"email-body\")": {
-                "extract_type": "all",
-                "comparison": "count",
-                "values": [
-                  ">=1"
-                ]
-              }
-            }
-          ],
-          "result": "Infection Email added",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Infection Email",
-      "target_tool": "MISP",
-      "uuid": "8f636640-e4f0-4ffb-abff-4e85597aa1bd"
-    },
-    {
-      "action": "malicious-payload",
-      "inject_evaluation": [
+            "name": "Infection Email",
+            "action": "infection-email",
+            "target_tool": "MISP",
+            "uuid": "8f636640-e4f0-4ffb-abff-4e85597aa1bd",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[].Attribute[] | select(.object_relation == \"email-body\")": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=1"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Infection Email added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[].Attribute[] | select(.object_relation == \"email-body\")": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=1"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              ".Event.Object[].Attribute[] | select((.type == \"filename\")).value": {
-                "extract_type": "all",
-                "comparison": "equals",
-                "values": [
-                  "cryptolocker.exe"
-                ]
-              }
-            }
-          ],
-          "result": "Malicious payload added",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Malicious Payload",
-      "target_tool": "MISP",
-      "uuid": "3e61a340-0314-4622-91cc-042f3ff8543a"
-    },
-    {
-      "action": "c2-ip",
-      "inject_evaluation": [
+            "name": "Malicious Payload",
+            "action": "malicious-payload",
+            "target_tool": "MISP",
+            "uuid": "3e61a340-0314-4622-91cc-042f3ff8543a",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[].Attribute[] | select((.type == \"filename\")).value": {
+                                "extract_type": "all",
+                                "comparison": "equals",
+                                "values": [
+                                    "cryptolocker.exe"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Malicious payload added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[].Attribute[] | select((.type == \"filename\")).value": {
+                                "extract_type": "all",
+                                "comparison": "equals",
+                                "values": [
+                                    "cryptolocker.exe"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              ".Event.Object[] | select((.name == \"domain-ip\") or (.name == \"ip-port\")) | .Attribute[].value": {
-                "extract_type": "all",
-                "comparison": "contains",
-                "values": [
-                  "81.177.170.166"
-                ]
-              }
-            }
-          ],
-          "result": "C2 IP added",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "C2 IP Address",
-      "target_tool": "MISP",
-      "uuid": "8a2d58c8-2b3a-4ba2-bb77-15bcfa704828"
-    },
-    {
-      "action": "registry-key",
-      "inject_evaluation": [
+            "name": "C2 IP Address",
+            "action": "c2-ip",
+            "target_tool": "MISP",
+            "uuid": "8a2d58c8-2b3a-4ba2-bb77-15bcfa704828",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select((.name == \"domain-ip\") or (.name == \"ip-port\")) | .Attribute[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "81.177.170.166"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "C2 IP added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[] | select((.name == \"domain-ip\") or (.name == \"ip-port\")) | .Attribute[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "81.177.170.166"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "query_context": {
+                            "request_is_rest": false,
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
-                "extract_type": "all",
-                "comparison": "contains-regex",
-                "values": [
-                  "HKCU.+SOFTWARE.+CryptoLocker.*"
-                ]
-              }
-            }
-          ],
-          "result": "Registry key added",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Registry Keys",
-      "target_tool": "MISP",
-      "uuid": "9df13cc8-b61b-4c9f-a1a8-66def8b64439"
-    },
-    {
-      "action": "pub-key",
-      "inject_evaluation": [
+            "name": "Registry Keys",
+            "action": "registry-key",
+            "target_tool": "MISP",
+            "uuid": "9df13cc8-b61b-4c9f-a1a8-66def8b64439",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains-regex",
+                                "values": [
+                                    "HKCU.+SOFTWARE.+CryptoLocker.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Registry key added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains-regex",
+                                "values": [
+                                    "HKCU.+SOFTWARE.+CryptoLocker.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
-                "extract_type": "all",
-                "comparison": "contains-regex",
-                "values": [
-                  "-----BEGIN PUBLIC KEY-----.*"
-                ]
-              }
-            }
-          ],
-          "result": "Public key added",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Public Key",
-      "target_tool": "MISP",
-      "uuid": "c5c03af1-7ef3-44e7-819a-6c4fd402148a"
-    },
-    {
-      "action": "context",
-      "inject_evaluation": [
+            "name": "Public Key",
+            "action": "pub-key",
+            "target_tool": "MISP",
+            "uuid": "c5c03af1-7ef3-44e7-819a-6c4fd402148a",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains-regex",
+                                "values": [
+                                    "-----BEGIN PUBLIC KEY-----.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Public key added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains-regex",
+                                "values": [
+                                    "-----BEGIN PUBLIC KEY-----.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              ".Event.Tag | select(length > 0) | .[].name": {
-                "extract_type": "all",
-                "comparison": "count",
-                "values": [
-                  ">=3"
-                ]
-              }
-            }
-          ],
-          "result": "Context added",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Contextualization",
-      "target_tool": "MISP",
-      "uuid": "11f6f0c2-8813-42ee-a312-136649d3f077"
-    },
-    {
-      "action": "published",
-      "inject_evaluation": [
+            "name": "Contextualization",
+            "action": "context",
+            "target_tool": "MISP",
+            "uuid": "11f6f0c2-8813-42ee-a312-136649d3f077",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Tag | select(length > 0) | .[].name": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=3"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Context added",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Tag | select(length > 0) | .[].name": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=3"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "ransomware"
-                ]
-              }
-            },
-            {
-              ".Event.published": {
-                "comparison": "equals",
-                "values": [
-                  "1"
-                ]
-              }
-            }
-          ],
-          "result": "Event published",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {},
-          "score_range": [
-            0,
-            20
-          ]
+            "name": "Published",
+            "action": "published",
+            "target_tool": "MISP",
+            "uuid": "e3ef4e5f-454a-48c8-a5d7-b3d1d25ecc9f",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "ransomware"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.published": {
+                                "comparison": "equals",
+                                "values": [
+                                    "1"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "Event published",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.published": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
         }
-      ],
-      "name": "Published",
-      "target_tool": "MISP",
-      "uuid": "e3ef4e5f-454a-48c8-a5d7-b3d1d25ecc9f"
-    }
-  ]
+    ]
 }
