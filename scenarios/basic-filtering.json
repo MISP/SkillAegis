@@ -1,231 +1,239 @@
 {
-  "exercise": {
-    "description": "Basic Filtering: Usage of the API to filter data",
-    "expanded": "Basic Filtering: Usage of the API to filter data",
-    "meta": {
-      "author": "MISP Project",
-      "level": "beginner",
-      "priority": 2
+    "exercise": {
+        "description": "Basic Filtering: Usage of the API to filter data",
+        "expanded": "Basic Filtering: Usage of the API to filter data",
+        "meta": {
+            "author": "MISP Project",
+            "level": "beginner",
+            "priority": 2
+        },
+        "name": "API: Basic Filtering",
+        "namespace": "misp-only",
+        "tags": [
+            "exercise:software-scope=\"misp\"",
+            "state:production"
+        ],
+        "total_duration": "7200",
+        "uuid": "4703a4b2-0ae4-47f3-9dc3-91250be60156",
+        "version": "202492"
     },
-    "name": "API: Basic Filtering",
-    "namespace": "data-model",
-    "tags": [
-      "exercise:software-scope=\"misp\"",
-      "state:production"
+    "inject_flow": [
+        {
+            "description": "Get Published in the past 48h",
+            "inject_uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4",
+            "reporting_callback": [],
+            "requirements": {},
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "caf68c86-65ed-4df3-99b8-7e346fa498ba"
+                ],
+                "trigger": [
+                    "startex"
+                ]
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "description": "IP IoCs changed in the past 48h in CSV",
+            "inject_uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba",
+            "reporting_callback": [],
+            "requirements": {
+                "inject_uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "3e96fb13-4aba-448c-8d79-efb93392cc88"
+                ],
+                "trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "description": "First 20 Attribute with TLP lower than `amber`",
+            "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88",
+            "reporting_callback": [],
+            "requirements": {
+                "inject_uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "1da0fdc8-9d0d-4618-a811-66491e196833"
+                ],
+                "trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "description": "Event count with `Phishing - T1566` involved",
+            "inject_uuid": "1da0fdc8-9d0d-4618-a811-66491e196833",
+            "reporting_callback": [],
+            "requirements": {
+                "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [],
+                "trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        }
     ],
-    "total_duration": "7200",
-    "uuid": "4703a4b2-0ae4-47f3-9dc3-91250be60156",
-    "version": "20240624"
-  },
-  "inject_flow": [
-    {
-      "description": "Get Published in the past 48h",
-      "inject_uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4",
-      "reporting_callback": [],
-      "requirements": {},
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "caf68c86-65ed-4df3-99b8-7e346fa498ba"
-        ],
-        "trigger": [
-          "startex"
-        ]
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "IP IoCs changed in the past 48h in CSV",
-      "inject_uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "3e96fb13-4aba-448c-8d79-efb93392cc88"
-        ],
-        "trigger": [
-        ]
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "First 20 Attribute with TLP lower than `amber`",
-      "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "1da0fdc8-9d0d-4618-a811-66491e196833"
-        ],
-        "trigger": [
-        ]
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "Event count with `Phishing - T1566` involved",
-      "inject_uuid": "1da0fdc8-9d0d-4618-a811-66491e196833",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-        ],
-        "trigger": [
-        ]
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    }
-  ],
-  "inject_payloads": [
-  ],
-  "injects": [
-    {
-      "action": "published_48",
-      "inject_evaluation": [
+    "inject_payloads": [],
+    "injects": [
         {
-          "parameters": [
-            {
-              "publish_timestamp": "48h",
-              "published": 1
-            }
-          ],
-          "result": "Published 48h retreived",
-          "evaluation_strategy": "query_mirror",
-          "evaluation_context": {
-            "request_is_rest": true,
-            "query_context": {
-              "url": "/attributes/restSearch",
-              "request_method": "POST"
-            }
-          },
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Get Published in the past 48h",
-      "target_tool": "MISP",
-      "uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4"
-    },
-    {
-      "action": "ip_csv",
-      "inject_evaluation": [
+            "action": "published_48",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            "publish_timestamp": "48h",
+                            "published": 1
+                        }
+                    ],
+                    "result": "Published 48h retreived",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/attributes/restSearch",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "name": "Get Published in the past 48h",
+            "target_tool": "MISP",
+            "uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4"
+        },
         {
-          "parameters": [
-            {
-              "type": ["ip-src", "ip-dst"],
-              "timestamp": "48h",
-              "to_ids": 1,
-              "returnFormat": "csv"
-            }
-          ],
-          "result": "IP CSV retrieved",
-          "evaluation_strategy": "query_mirror",
-          "evaluation_context": {
-            "request_is_rest": true,
-            "query_context": {
-              "url": "/attributes/restSearch",
-              "request_method": "POST"
-            }
-          },
-          "score_range": [
-            0,
-            40
-          ]
-        }
-      ],
-      "name": "IP IoCs changed in the past 48h in CSV",
-      "target_tool": "MISP",
-      "uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba"
-    },
-    {
-      "action": "20_tlp",
-      "inject_evaluation": [
+            "action": "ip_csv",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            "type": [
+                                "ip-src",
+                                "ip-dst"
+                            ],
+                            "timestamp": "48h",
+                            "to_ids": 1,
+                            "returnFormat": "csv"
+                        }
+                    ],
+                    "result": "IP CSV retrieved",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/attributes/restSearch",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        40
+                    ]
+                }
+            ],
+            "name": "IP IoCs changed in the past 48h in CSV",
+            "target_tool": "MISP",
+            "uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba"
+        },
         {
-          "parameters": [
-            {
-              "page": 1,
-              "limit": 20,
-              "tags": ["tlp:white", "tlp:clear", "tlp:green"]
-            }
-          ],
-          "result": "20 Attribute tagged retrieved",
-          "evaluation_strategy": "query_mirror",
-          "evaluation_context": {
-            "request_is_rest": true,
-            "query_context": {
-              "url": "/attributes/restSearch",
-              "request_method": "POST"
-            }
-          },
-          "score_range": [
-            0,
-            30
-          ]
-        }
-      ],
-      "name": "First 20 Attribute with TLP lower than `amber`",
-      "target_tool": "MISP",
-      "uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
-    },
-    {
-      "action": "phishing_count",
-      "inject_evaluation": [
+            "action": "20_tlp",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            "page": 1,
+                            "limit": 20,
+                            "tags": [
+                                "tlp:white",
+                                "tlp:clear",
+                                "tlp:green"
+                            ]
+                        }
+                    ],
+                    "result": "20 Attribute tagged retrieved",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/attributes/restSearch",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        30
+                    ]
+                }
+            ],
+            "name": "First 20 Attribute with TLP lower than `amber`",
+            "target_tool": "MISP",
+            "uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
+        },
         {
-          "parameters": [
-            {
-              "returnFormat": "attack",
-              "tags": ["misp-galaxy:mitre-attack-pattern=\"Phishing - T1566\""]
-            }
-          ],
-          "result": "Phising counted",
-          "evaluation_strategy": "query_mirror",
-          "evaluation_context": {
-            "request_is_rest": true,
-            "query_context": {
-              "url": "/events/restSearch",
-              "request_method": "POST"
-            }
-          },
-          "score_range": [
-            0,
-            10
-          ]
+            "action": "phishing_count",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            "returnFormat": "attack",
+                            "tags": [
+                                "misp-galaxy:mitre-attack-pattern=\"Phishing - T1566\""
+                            ]
+                        }
+                    ],
+                    "result": "Phising counted",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        10
+                    ]
+                }
+            ],
+            "name": "Event count with `Phishing - T1566` involved",
+            "target_tool": "MISP",
+            "uuid": "1da0fdc8-9d0d-4618-a811-66491e196833"
         }
-      ],
-      "name": "Event count with `Phishing - T1566` involved",
-      "target_tool": "MISP",
-      "uuid": "1da0fdc8-9d0d-4618-a811-66491e196833"
-    }
-  ]
+    ]
 }

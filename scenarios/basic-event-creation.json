@@ -1,400 +1,397 @@
 {
-  "exercise": {
-    "description": "Simple Data Creation: Creation of an Event using the API",
-    "expanded": "Simple Data Creation: Creation of an Event using the API",
-    "meta": {
-      "author": "MISP Project",
-      "level": "beginner",
-      "priority": 1
+    "exercise": {
+        "description": "Simple Data Creation: Creation of an Event using the API",
+        "expanded": "Simple Data Creation: Creation of an Event using the API",
+        "meta": {
+            "author": "MISP Project",
+            "level": "beginner",
+            "priority": 1
+        },
+        "name": "API: Simple Data Creation",
+        "namespace": "misp-only",
+        "tags": [
+            "exercise:software-scope=\"misp\"",
+            "state:production"
+        ],
+        "total_duration": "7200",
+        "uuid": "29324587-db6c-4a73-a209-cf8c79871629",
+        "version": "202492"
     },
-    "name": "API: Simple Data Creation",
-    "namespace": "data-model",
-    "tags": [
-      "exercise:software-scope=\"misp\"",
-      "state:production"
-    ],
-    "total_duration": "7200",
-    "uuid": "29324587-db6c-4a73-a209-cf8c79871629",
-    "version": "20240624"
-  },
-  "inject_flow": [
-    {
-      "description": "Event Creation",
-      "inject_uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e",
-      "reporting_callback": [],
-      "requirements": {},
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "00275360-d84a-4ce7-84fc-98baefd13776"
-        ],
-        "trigger": [
-          "startex"
-        ]
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "Attributes Creation",
-      "inject_uuid": "00275360-d84a-4ce7-84fc-98baefd13776",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e",
-        "resolution_requirement": "MISP Event created"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "be1c3d25-e0df-4492-bdc1-f2e825194ef3"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "Object Creation",
-      "inject_uuid": "be1c3d25-e0df-4492-bdc1-f2e825194ef3",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e",
-        "resolution_requirement": "MISP Event created"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "cf149a8c-5601-4eec-aea3-5142170d309b"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "Edition to `org-only`",
-      "inject_uuid": "cf149a8c-5601-4eec-aea3-5142170d309b",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "00275360-d84a-4ce7-84fc-98baefd13776",
-        "resolution_requirement": "MISP Attributes created"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [
-          "b4a8c490-4f0a-4a33-bee1-044b9f659e83"
-        ],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    },
-    {
-      "description": "Tagging `tlp:green`",
-      "inject_uuid": "b4a8c490-4f0a-4a33-bee1-044b9f659e83",
-      "reporting_callback": [],
-      "requirements": {
-        "inject_uuid": "00275360-d84a-4ce7-84fc-98baefd13776",
-        "resolution_requirement": "MISP Attributes created"
-      },
-      "sequence": {
-        "completion_trigger": [
-          "time_expiration",
-          "completion"
-        ],
-        "followed_by": [],
-        "trigger": []
-      },
-      "timing": {
-        "triggered_at": null
-      }
-    }
-  ],
-  "inject_payloads": [],
-  "injects": [
-    {
-      "action": "event_creation",
-      "inject_evaluation": [
+    "inject_flow": [
         {
-          "parameters": [
-            {
-              ".response[].Event.event_creator_email": {
-                "comparison": "equals",
-                "values": [
-                  "{{user_email}}"
+            "description": "Event Creation",
+            "inject_uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e",
+            "reporting_callback": [],
+            "requirements": {},
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "00275360-d84a-4ce7-84fc-98baefd13776"
+                ],
+                "trigger": [
+                    "startex"
                 ]
-              }
             },
-            {
-              ".response[].Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "event",
-                  "API"
-                ]
-              }
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
             }
-          ],
-          "result": "MISP Event created",
-          "evaluation_strategy": "query_search",
-          "evaluation_context": {
-            "request_is_rest": true,
-            "query_context": {
-              "url": "/events/restSearch",
-              "request_method": "POST",
-              "payload": {
-                "timestamp": "10d",
-                "eventinfo": "%API%"
-              }
-            }
-          },
-          "score_range": [
-            0,
-            20
-          ]
-        }
-      ],
-      "name": "Event Creation",
-      "target_tool": "MISP",
-      "uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e"
-    },
-    {
-      "action": "attribute_creation",
-      "inject_evaluation": [
-        {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "event",
-                  "API"
-                ]
-              }
-            },
-            {
-              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"ip-dst\")).value": {
-                "comparison": "contains",
-                "values": [
-                  "4.3.2.1"
-                ]
-              }
-            },
-            {
-              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"domain\")).value": {
-                "comparison": "contains",
-                "values": [
-                  "evil.com"
-                ]
-              }
-            },
-            {
-              "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"filename\")).value": {
-                "comparison": "contains",
-                "values": [
-                  "evil.exe"
-                ]
-              }
-            }
-          ],
-          "result": "MISP Attributes created",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {
-            "request_is_rest": true
-          },
-          "score_range": [
-            0,
-            30
-          ]
-        }
-      ],
-      "name": "Attributes Creation",
-      "target_tool": "MISP",
-      "uuid": "00275360-d84a-4ce7-84fc-98baefd13776"
-    },
-    {
-      "action": "object_creation",
-      "inject_evaluation": [
-        {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "event",
-                  "API"
-                ]
-              }
-            },
-            {
-              ".Event.Object[] | select(.name == \"domain-ip\")": {
-                "comparison": "count",
-                "values": [
-                  ">0"
-                ]
-              }
-            }
-          ],
-          "result": "MISP Object created`",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {
-            "request_is_rest": true
-          },
-          "score_range": [
-            0,
-            10
-          ]
         },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "event",
-                  "API"
-                ]
-              }
+            "description": "Attributes Creation",
+            "inject_uuid": "00275360-d84a-4ce7-84fc-98baefd13776",
+            "reporting_callback": [],
+            "requirements": {
+                "inject_uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e",
+                "resolution_requirement": "MISP Event created"
             },
-            {
-              ".Event.Object[] | select(.name == \"domain-ip\") | .Attribute[] | select((.type == \"ip\")).value": {
-                "comparison": "contains",
-                "values": [
-                  "4.3.2.1"
-                ]
-              }
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "be1c3d25-e0df-4492-bdc1-f2e825194ef3"
+                ],
+                "trigger": []
             },
-            {
-              ".Event.Object[] | select(.name == \"domain-ip\") | .Attribute[] | select((.type == \"domain\")).value": {
-                "comparison": "contains",
-                "values": [
-                  "foobar.baz"
-                ]
-              }
-            },
-            {
-              ".Event.Object[] | select(.name == \"domain-ip\") | .Attribute[] | select((.type == \"text\")).value": {
-                "comparison": "contains",
-                "values": [
-                  "Classified information"
-                ]
-              }
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
             }
-          ],
-          "result": "MISP Object's Attributes created`",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {
-            "request_is_rest": true
-          },
-          "score_range": [
-            0,
-            10
-          ]
-        }
-      ],
-      "name": "Object Creation",
-      "target_tool": "MISP",
-      "uuid": "be1c3d25-e0df-4492-bdc1-f2e825194ef3"
-    },
-    {
-      "action": "edition_org_only",
-      "inject_evaluation": [
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "event",
-                  "API"
-                ]
-              }
+            "description": "Object Creation",
+            "inject_uuid": "be1c3d25-e0df-4492-bdc1-f2e825194ef3",
+            "reporting_callback": [],
+            "requirements": {
+                "inject_uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e",
+                "resolution_requirement": "MISP Event created"
             },
-            {
-              ".Event.Attribute[] | select((.type == \"ip-dst\") and (.value == \"1.2.3.4\")).distribution": {
-                "comparison": "contains",
-                "values": [
-                  0
-                ]
-              }
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "cf149a8c-5601-4eec-aea3-5142170d309b"
+                ],
+                "trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
             }
-          ],
-          "result": "MISP Edition `org-only` done",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {
-            "request_is_rest": true
-          },
-          "score_range": [
-            0,
-            10
-          ]
-        }
-      ],
-      "name": "Edition to `org-only`",
-      "target_tool": "MISP",
-      "uuid": "cf149a8c-5601-4eec-aea3-5142170d309b"
-    },
-    {
-      "action": "tagging_tlp_green",
-      "inject_evaluation": [
+        },
         {
-          "parameters": [
-            {
-              ".Event.info": {
-                "comparison": "contains",
-                "values": [
-                  "event",
-                  "API"
-                ]
-              }
+            "inject_uuid": "cf149a8c-5601-4eec-aea3-5142170d309b",
+            "description": "Edition to `org-only`",
+            "requirements": {
+                "inject_uuid": "00275360-d84a-4ce7-84fc-98baefd13776",
+                "resolution_requirement": "MISP Attributes created"
             },
-            {
-              ".Event.Attribute[] | select((.type == \"ip-dst\") and (.value == \"1.2.3.4\")).distribution": {
-                "comparison": "contains",
-                "values": [
-                  0
-                ]
-              }
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [
+                    "b4a8c490-4f0a-4a33-bee1-044b9f659e83"
+                ],
+                "trigger": []
             },
-            {
-              ".Event.Attribute[] | select((.type == \"ip-dst\") and (.value == \"1.2.3.4\")).Tag[].name": {
-                "comparison": "contains",
-                "values": [
-                  "tlp:green"
-                ]
-              }
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
             }
-          ],
-          "result": "MISP Tagging `tlp:green` done",
-          "evaluation_strategy": "data_filtering",
-          "evaluation_context": {
-            "request_is_rest": true
-          },
-          "score_range": [
-            0,
-            20
-          ]
+        },
+        {
+            "inject_uuid": "b4a8c490-4f0a-4a33-bee1-044b9f659e83",
+            "description": "Tagging `tlp:green`",
+            "requirements": {
+                "inject_uuid": "00275360-d84a-4ce7-84fc-98baefd13776",
+                "resolution_requirement": "MISP Attributes created"
+            },
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [],
+                "trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
         }
-      ],
-      "name": "Tagging `tlp:green`",
-      "target_tool": "MISP",
-      "uuid": "b4a8c490-4f0a-4a33-bee1-044b9f659e83"
-    }
-  ]
+    ],
+    "inject_payloads": [],
+    "injects": [
+        {
+            "action": "event_creation",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "event",
+                                    "API"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Event created",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "10d",
+                                "eventinfo": "%API%"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "name": "Event Creation",
+            "target_tool": "MISP",
+            "uuid": "a6b5cf88-ba93-4c3f-8265-04e00d53778e"
+        },
+        {
+            "action": "attribute_creation",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "event",
+                                    "API"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"ip-dst\")).value": {
+                                "comparison": "contains",
+                                "values": [
+                                    "4.3.2.1"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"domain\")).value": {
+                                "comparison": "contains",
+                                "values": [
+                                    "evil.com"
+                                ]
+                            }
+                        },
+                        {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select((.type == \"filename\")).value": {
+                                "comparison": "contains",
+                                "values": [
+                                    "evil.exe"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Attributes created",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {
+                        "request_is_rest": true
+                    },
+                    "score_range": [
+                        0,
+                        30
+                    ]
+                }
+            ],
+            "name": "Attributes Creation",
+            "target_tool": "MISP",
+            "uuid": "00275360-d84a-4ce7-84fc-98baefd13776"
+        },
+        {
+            "action": "object_creation",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "event",
+                                    "API"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select(.name == \"domain-ip\")": {
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Object created`",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {
+                        "request_is_rest": true
+                    },
+                    "score_range": [
+                        0,
+                        10
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "event",
+                                    "API"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select(.name == \"domain-ip\") | .Attribute[] | select((.type == \"ip\")).value": {
+                                "comparison": "contains",
+                                "values": [
+                                    "4.3.2.1"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select(.name == \"domain-ip\") | .Attribute[] | select((.type == \"domain\")).value": {
+                                "comparison": "contains",
+                                "values": [
+                                    "foobar.baz"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Object[] | select(.name == \"domain-ip\") | .Attribute[] | select((.type == \"text\")).value": {
+                                "comparison": "contains",
+                                "values": [
+                                    "Classified information"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Object's Attributes created`",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {
+                        "request_is_rest": true
+                    },
+                    "score_range": [
+                        0,
+                        10
+                    ]
+                }
+            ],
+            "name": "Object Creation",
+            "target_tool": "MISP",
+            "uuid": "be1c3d25-e0df-4492-bdc1-f2e825194ef3"
+        },
+        {
+            "name": "Edition to `org-only`",
+            "action": "edition_org_only",
+            "target_tool": "MISP",
+            "uuid": "cf149a8c-5601-4eec-aea3-5142170d309b",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "event",
+                                    "API"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Attribute[] | select((.type == \"text\") and (.value == \"Classified information\")).distribution": {
+                                "comparison": "contains",
+                                "values": [
+                                    0
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Edition `org-only` done",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {
+                        "request_is_rest": true
+                    },
+                    "score_range": [
+                        0,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Tagging `tlp:green`",
+            "action": "tagging_tlp_green",
+            "target_tool": "MISP",
+            "uuid": "b4a8c490-4f0a-4a33-bee1-044b9f659e83",
+            "description": null,
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".Event.info": {
+                                "comparison": "contains",
+                                "values": [
+                                    "event",
+                                    "API"
+                                ]
+                            }
+                        },
+                        {
+                            ".Event.Attribute[] | select((.type == \"ip-dst\") and (.value == \"1.2.3.4\")).Tag[].name": {
+                                "comparison": "contains",
+                                "values": [
+                                    "tlp:green"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "MISP Tagging `tlp:green` done",
+                    "evaluation_strategy": "data_filtering",
+                    "evaluation_context": {
+                        "request_is_rest": true
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ]
+        }
+    ]
 }
