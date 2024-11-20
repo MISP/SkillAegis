@@ -75,6 +75,32 @@ To update the project, follow these steps:
     git submodule update --recursive
     ```
 
+## Docker
+1. Build the image
+    ```bash
+    docker compose build
+    ```
+2. Copy and update the config
+    ```bash
+    cp template.env .env
+    vim .env
+    ```
+3. [optional] Allow the application to reach services on the host
+    ```bash
+    # Create a docker override file and add the host as extra_hosts
+    tee docker-compose.override.yml > /dev/null <<EOF
+services:
+  skillaegis-dashboard:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+EOF
+```
+    ```
+4. Run the application
+    ```bash
+    docker compose up
+    ```
+
 # Project Structure
 
 The project is composed of three applications:
