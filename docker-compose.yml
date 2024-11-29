@@ -1,3 +1,8 @@
+volumes:
+  skillaegis_main_storage:
+  skillaegis_dashboard_storage:
+  skillaegis_editor_storage:
+
 services:
     skillaegis-main:
         build:
@@ -11,6 +16,7 @@ services:
             - SKILLAEGIS_DASHBOARD_URL=http://localhost:4001
             - SKILLAEGIS_EDITOR_URL=http://localhost:4002
         volumes:
+            - skillaegis_main_storage:/app/
             - ./scenarios:/app/scenarios
         ports:
             - "4000:4000"
@@ -29,6 +35,7 @@ services:
             - SKILLAEGIS_MISP_APIKEY=${SKILLAEGIS_MISP_APIKEY:-FI4gCRghRZvLVjlLPLTFZ852x2njkkgPSz0zQ3E0}
             - SKILLAEGIS_MISP_SKIPSSL=${SKILLAEGIS_MISP_SKIPSSL:-1}
         volumes:
+            - skillaegis_dashboard_storage:/app/
             - ./scenarios:/app/scenarios
         ports:
             - "4001:4001"
@@ -44,6 +51,7 @@ services:
             - SKILLAEGIS_PORT=4002
             - SKILLAEGIS_EXERCISE_FOLDER=scenarios
         volumes:
+            - skillaegis_editor_storage:/app/
             - ./scenarios:/app/scenarios
         ports:
             - "4002:4002"

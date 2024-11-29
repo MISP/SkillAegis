@@ -76,6 +76,9 @@ To update the project, follow these steps:
     ```
 
 ## Docker
+
+You can alternatively run it in Docker, following those steps :
+
 1. Build the image
     ```bash
     docker compose build
@@ -89,13 +92,13 @@ To update the project, follow these steps:
     ```bash
     # Create a docker override file and add the host as extra_hosts
     tee docker-compose.override.yml > /dev/null <<EOF
-services:
-  skillaegis-dashboard:
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-EOF
-```
+    services:
+      skillaegis-dashboard:
+        extra_hosts:
+          - "host.docker.internal:host-gateway"
+    EOF
     ```
+    
 4. Run the application
     ```bash
     docker compose up
@@ -191,7 +194,6 @@ We welcome contributions from the community. To contribute:
     git push origin feature/your-feature-name
     ```
 5. Open a pull request.
-.
 
 # License
 This software is licensed under GNU Affero General Public License version 3
