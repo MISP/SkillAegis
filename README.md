@@ -89,12 +89,11 @@ To update the project, follow these steps:
     ```bash
     # Create a docker override file and add the host as extra_hosts
     tee docker-compose.override.yml > /dev/null <<EOF
-services:
-  skillaegis-dashboard:
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-EOF
-```
+    services:
+    skillaegis-dashboard:
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
+    EOF
     ```
 4. Run the application
     ```bash
