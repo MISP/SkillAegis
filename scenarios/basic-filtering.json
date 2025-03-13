@@ -19,10 +19,60 @@
     },
     "inject_flow": [
         {
-            "description": "Get Published in the past 48h",
-            "inject_uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4",
-            "reporting_callback": [],
+            "inject_uuid": "156ca5fd-841d-42bc-b2f9-80f71f81c532",
+            "description": "",
             "requirements": {},
+            "sequence": {
+                "completion_trigger": [
+                    "time_expiration",
+                    "completion"
+                ],
+                "followed_by": [],
+                "trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "0f70f7dc-cada-4a27-9766-eac9938a3239",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "156ca5fd-841d-42bc-b2f9-80f71f81c532"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "7eaf1a6b-4dab-4860-88a6-14f65798f7f4",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "0f70f7dc-cada-4a27-9766-eac9938a3239"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
+            "inject_uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4",
+            "description": "Get Published in the past 48h",
+            "requirements": {
+                "inject_uuid": "7eaf1a6b-4dab-4860-88a6-14f65798f7f4"
+            },
             "sequence": {
                 "completion_trigger": [
                     "time_expiration",
@@ -31,9 +81,7 @@
                 "followed_by": [
                     "caf68c86-65ed-4df3-99b8-7e346fa498ba"
                 ],
-                "trigger": [
-                    "startex"
-                ]
+                "trigger": []
             },
             "timing": {
                 "triggered_at": null,
@@ -63,9 +111,8 @@
             }
         },
         {
-            "description": "First 20 Attribute with TLP lower than `amber`",
             "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88",
-            "reporting_callback": [],
+            "description": "First 20 Attribute with TLP lower than `amber`",
             "requirements": {
                 "inject_uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba"
             },
@@ -85,9 +132,8 @@
             }
         },
         {
-            "description": "Event count with `Phishing - T1566` involved",
             "inject_uuid": "1da0fdc8-9d0d-4618-a811-66491e196833",
-            "reporting_callback": [],
+            "description": "Event count with `Phishing - T1566` involved",
             "requirements": {
                 "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
             },
@@ -108,7 +154,119 @@
     "inject_payloads": [],
     "injects": [
         {
+            "name": "Get your user info",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "156ca5fd-841d-42bc-b2f9-80f71f81c532",
+            "description": "Get the information about your user",
+            "inject_evaluation": [
+                {
+                    "parameters": [],
+                    "result": "Get your user info",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/users/view/me",
+                            "request_method": "GET"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        },
+        {
+            "name": "tlp:green Events",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "0f70f7dc-cada-4a27-9766-eac9938a3239",
+            "description": "Get all tlp:green Events",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            "tags": "tlp:green"
+                        }
+                    ],
+                    "result": "tlp:green Events",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        {
+                            "tags": [
+                                "tlp:green"
+                            ]
+                        }
+                    ],
+                    "result": "tlp:green Events",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/events/index",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
+        {
+            "name": "All URLs",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "7eaf1a6b-4dab-4860-88a6-14f65798f7f4",
+            "description": "Get all URLs",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            "type": "url"
+                        }
+                    ],
+                    "result": "All URLs",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/attributes/restSearch",
+                            "request_method": "POST"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        },
+        {
+            "name": "Get Published in the past 48h",
             "action": "published_48",
+            "target_tool": "MISP",
+            "uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4",
+            "description": null,
             "inject_evaluation": [
                 {
                     "parameters": [
@@ -132,9 +290,7 @@
                     ]
                 }
             ],
-            "name": "Get Published in the past 48h",
-            "target_tool": "MISP",
-            "uuid": "e2216993-6192-4e7c-ae30-97cfe9de61b4"
+            "inject_evaluation_join_type": null
         },
         {
             "action": "ip_csv",
@@ -171,7 +327,11 @@
             "uuid": "caf68c86-65ed-4df3-99b8-7e346fa498ba"
         },
         {
+            "name": "First 20 Attribute with TLP lower than `amber`",
             "action": "20_tlp",
+            "target_tool": "MISP",
+            "uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88",
+            "description": null,
             "inject_evaluation": [
                 {
                     "parameters": [
@@ -200,12 +360,14 @@
                     ]
                 }
             ],
-            "name": "First 20 Attribute with TLP lower than `amber`",
-            "target_tool": "MISP",
-            "uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
+            "inject_evaluation_join_type": null
         },
         {
+            "name": "Event count with `Phishing - T1566` involved",
             "action": "phishing_count",
+            "target_tool": "MISP",
+            "uuid": "1da0fdc8-9d0d-4618-a811-66491e196833",
+            "description": null,
             "inject_evaluation": [
                 {
                     "parameters": [
@@ -231,9 +393,7 @@
                     ]
                 }
             ],
-            "name": "Event count with `Phishing - T1566` involved",
-            "target_tool": "MISP",
-            "uuid": "1da0fdc8-9d0d-4618-a811-66491e196833"
+            "inject_evaluation_join_type": null
         }
     ]
 }
