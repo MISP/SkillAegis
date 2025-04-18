@@ -660,7 +660,7 @@
                             }
                         },
                         {
-                            ".Event.Tag | select(length > 0) | .[].name": {
+                            ".Event.Tag[].name | select((contains(\"misp-galaxy:mitre-attack-pattern\")))": {
                                 "extract_type": "all",
                                 "comparison": "count",
                                 "values": [
@@ -688,7 +688,7 @@
                             }
                         },
                         {
-                            ".response[].Event.Tag | select(length > 0) | .[].name": {
+                            ".response[].Event.Tag[].name | select((contains(\"misp-galaxy:mitre-attack-pattern\")))": {
                                 "extract_type": "all",
                                 "comparison": "count",
                                 "values": [

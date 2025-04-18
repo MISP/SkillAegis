@@ -19,13 +19,14 @@
             "sequence": {
                 "followed_by": [],
                 "trigger": [
-                    "startex"
+                    "startex",
+                    "periodic"
                 ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -36,12 +37,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -52,12 +55,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -68,12 +73,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -84,12 +91,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -100,12 +109,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -116,12 +127,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -132,12 +145,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         },
         {
@@ -148,12 +163,14 @@
             },
             "sequence": {
                 "followed_by": [],
-                "trigger": [],
+                "trigger": [
+                    "periodic"
+                ],
                 "completion_trigger": []
             },
             "timing": {
                 "triggered_at": null,
-                "periodic_run_every": null
+                "periodic_run_every": 10
             }
         }
     ],
@@ -184,8 +201,45 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.info": {
+                                "comparison": "regex",
+                                "values": [
+                                    ".*[pP]hishing.*"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
             "name": "Phishing Domains",
@@ -222,8 +276,47 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "secure-pay.com",
+                                    "secure-book.com"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
             "name": "IP Addresses",
@@ -260,8 +353,47 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[].value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "195.208.152.43",
+                                    "80.72.225.30"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
             "name": "4 C2 Domain Name",
@@ -297,8 +429,46 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[] | select(.value | match(\"https://c2.[a-z]{6}.deadnxuyla.ru\"))": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=4"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
             "name": "Malicious Payload",
@@ -334,8 +504,46 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[].Attribute[] | select(.type == \"sha1\") | .value": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "82b3bd7206da9a0a949d48d1ce92c7f05dfbe230"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
             "name": "IDS Rule",
@@ -371,14 +579,53 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[] | select(.name == \"suricata\")": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=1"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
-            "uuid": "0af5d8f0-0158-4834-b458-f0562ebed286",
-            "target_tool": "MISP",
             "name": "Registry Keys",
             "action": "",
+            "target_tool": "MISP",
+            "uuid": "0af5d8f0-0158-4834-b458-f0562ebed286",
+            "description": "The registry key",
             "inject_evaluation": [
                 {
                     "parameters": [
@@ -407,15 +654,53 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[] | select(.value | match(\"HKCU.+SOFTWARE.+MSCall.\"))": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">=1"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
             ],
-            "description": "The registry key"
+            "inject_evaluation_join_type": "OR"
         },
         {
-            "uuid": "95968bf2-0350-4f68-984e-cac18ec614fd",
-            "target_tool": "MISP",
             "name": "Phishing Email",
             "action": "",
+            "target_tool": "MISP",
+            "uuid": "95968bf2-0350-4f68-984e-cac18ec614fd",
+            "description": null,
             "inject_evaluation": [
                 {
                     "parameters": [
@@ -444,14 +729,53 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[] | select(.name == \"email\")": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
-            ]
+            ],
+            "inject_evaluation_join_type": "OR"
         },
         {
-            "uuid": "d1d04daf-83ec-4583-89de-3bdab6b2a06a",
-            "target_tool": "MISP",
             "name": "Symmetric Key",
             "action": "",
+            "target_tool": "MISP",
+            "uuid": "d1d04daf-83ec-4583-89de-3bdab6b2a06a",
+            "description": "The XOR Key",
             "inject_evaluation": [
                 {
                     "parameters": [
@@ -480,9 +804,46 @@
                         0,
                         20
                     ]
+                },
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[] | select(.value | match(\"(0x)?281A77EA\"))": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "timestamp": "2h"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
                 }
             ],
-            "description": "The XOR Key"
+            "inject_evaluation_join_type": "OR"
         }
     ]
 }
