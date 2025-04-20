@@ -418,20 +418,20 @@
                     "parameters": [
                         {
                             ".Event.Note[].note": {
-                                "extract_type": "all",
+                                "extract_type": "first",
                                 "comparison": "contains",
                                 "values": [
-                                    "{{webhook_data.Event.info}}",
-                                    "{{webhook_data.Event.attribute_count}}"
+                                    "{{.webhook_data.Event.Object | length}}",
+                                    "{{.webhook_data.Event.attribute_count}}"
                                 ]
                             }
                         }
                     ],
                     "result": "",
-                    "evaluation_strategy": "web_query",
+                    "evaluation_strategy": "misp_query_search",
                     "evaluation_context": {
                         "query_context": {
-                            "url": "/events/view/{{webhook_data.Event.uuid}}.json",
+                            "url": "/events/view/{{.webhook_data.Event.uuid}}.json",
                             "request_method": "GET"
                         }
                     },
