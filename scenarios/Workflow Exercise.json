@@ -6,10 +6,11 @@
         "meta": {
             "author": "Sami Mokaddem",
             "level": "expert",
-            "priority": 10
+            "priority": 10,
+            "hall_of_fame": false
         },
         "uuid": "ff5e17cb-9234-4d02-893c-1772f968969f",
-        "version": "2025411"
+        "version": "2025612"
     },
     "inject_flow": [
         {
