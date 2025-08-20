@@ -10,7 +10,7 @@
 - **Run Exercises**: Deploy scenarios and run training sessions.
 - **Live Dashboard**: Monitor progress and performance with the live dashboard, providing realtime insights and analytics.
 
-## Installation
+## Local installation
 
 To get started with SkillAegis, follow these steps:
 
@@ -79,8 +79,14 @@ To update the project, follow these steps:
 
 You can alternatively run it in Docker, following those steps :
 
+0. Initialize the submodules
+    ```bash
+    git submodule update --init --recursive
+    ```
+
 1. Build the image
     ```bash
+    # or use docker-compose
     docker compose build
     ```
 2. Copy and update the config
