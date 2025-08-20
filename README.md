@@ -18,24 +18,30 @@ To get started with SkillAegis, follow these steps:
     ```bash
     python -V
     ```
-1. Clone the repository:
+1. Install dependencies
+    ```bash
+    sudo apt install screen jq git
+    ```
+
+2. Clone the repository:
     ```bash
     git clone https://github.com/MISP/SkillAegis.git
     ```
-2. Navigate to the project directory:
+3. Navigate to the project directory:
     ```bash
     cd SkillAegis
     ```
-3. Initialize the submodules
+4. Initialize the submodules
     ```bash
     git submodule update --init --recursive
     ```
-4. Clone the configuration file
+5. Clone the configuration file
     ```bash
     cp config.json.sample config.json
     ```
     -   [optional] Update the configuration
-5. Install the submodule dependencies
+
+6. Install the submodule dependencies
    ```bash
    # Editor
    pushd SkillAegis-Editor
@@ -57,7 +63,8 @@ To get started with SkillAegis, follow these steps:
    deactivate
    popd
    ```
-6. Start the project
+
+7. Start the project
    ```bash
    bash SkillAegis.sh
    ```
@@ -70,6 +77,7 @@ To update the project, follow these steps:
     ```bash
     git pull
     ```
+
 2. Pull the latest changes for all submodules
     ```bash
     git submodule update --recursive
@@ -89,11 +97,13 @@ You can alternatively run it in Docker, following those steps :
     # or use docker-compose
     docker compose build
     ```
+
 2. Copy and update the config
     ```bash
     cp template.env .env
     vim .env
     ```
+
 3. [optional] Allow the application to reach services on the host
     ```bash
     # Create a docker override file and add the host as extra_hosts
@@ -104,7 +114,7 @@ You can alternatively run it in Docker, following those steps :
           - "host.docker.internal:host-gateway"
     EOF
     ```
-    
+
 4. Run the application
     ```bash
     docker compose up
