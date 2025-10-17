@@ -10,6 +10,7 @@
 - **Run Exercises**: Deploy scenarios and run training sessions.
 - **Live Dashboard**: Monitor progress and performance with the live dashboard, providing realtime insights and analytics.
 
+
 ## Local installation
 
 To get started with SkillAegis, follow these steps:
@@ -18,6 +19,7 @@ To get started with SkillAegis, follow these steps:
     ```bash
     python -V
     ```
+
 1. Install dependencies
     ```bash
     sudo apt install screen jq git
@@ -27,14 +29,17 @@ To get started with SkillAegis, follow these steps:
     ```bash
     git clone https://github.com/MISP/SkillAegis.git
     ```
+
 3. Navigate to the project directory:
     ```bash
     cd SkillAegis
     ```
+
 4. Initialize the submodules
     ```bash
     git submodule update --init --recursive
     ```
+
 5. Clone the configuration file
     ```bash
     cp config.json.sample config.json
@@ -47,7 +52,8 @@ To get started with SkillAegis, follow these steps:
    pushd SkillAegis-Editor
    python3 -m venv venv
    source venv/bin/activate
-   pip3 install -r requirements.txt
+   pip install -U setuptools pip
+   pip install -r requirements.txt
    cp config.py.sample config.py
    # [recommended] Update the configuration's MISP part
    deactivate
@@ -57,7 +63,8 @@ To get started with SkillAegis, follow these steps:
    pushd SkillAegis-Dashboard
    python3 -m venv venv
    source venv/bin/activate
-   pip3 install -r requirements.txt
+   pip install -U setuptools pip
+   pip install -r backend/requirements.txt
    cp config.py.sample config.py
    # [recommended] Update the configuration
    deactivate
@@ -69,11 +76,12 @@ To get started with SkillAegis, follow these steps:
    bash SkillAegis.sh
    ```
 
+
 ## Update
 
 To update the project, follow these steps:
 
-1. Pull the latest changes
+1. Pull the latest changes in the main entry repository
     ```bash
     git pull
     ```
@@ -82,6 +90,46 @@ To update the project, follow these steps:
     ```bash
     git submodule update --recursive
     ```
+
+3. Compare the current config with the sample config
+   ```bash
+   diff -u config.json.sample config.json
+   ```
+
+4. Update the submodule dependencies
+   ```bash
+   # Editor
+   pushd SkillAegis-Editor
+   source venv/bin/activate
+   pip install -U setuptools pip
+   pip install -U -r requirements.txt
+   diff -u config.py.sample config.py
+   deactivate
+   popd
+
+   # Dashboard
+   pushd SkillAegis-Dashboard
+   source venv/bin/activate
+   pip install -U setuptools pip
+   pip install -U -r backend/requirements.txt
+   deactivate
+   popd
+   ```
+
+
+## Update issues
+
+### No module named pip
+
+If you get the error below you can simply recreate the venv with `python3 -m venv venv`.
+
+```bash
+$ pip install -U -r requirements.txt
+Traceback (most recent call last):
+  File "/home/steve/SkillAegis/SkillAegis-Editor/venv/bin/pip", line 5, in <module>
+    from pip._internal.cli.main import main
+ModuleNotFoundError: No module named 'pip'
+```
 
 ## Docker
 
@@ -146,6 +194,7 @@ The **Editor** can be used to design or edit scenario.
 
 ![SkillAegis Editor Inject Tester](./docs/SkillAegis-Editor_inject-tester.png)
 *Writing evaluations for injects can be challenging, so the inject tester is provided to streamline this process.*
+
 
 ## SkillAegis Dashboard
 The **Dashboard** can be used to run a training session and visualize the progress of participants in real-time.
@@ -215,6 +264,7 @@ We welcome contributions from the community. To contribute:
 This software is licensed under GNU Affero General Public License version 3
 
 ```
-Copyright (c) 2024 Sami Mokaddem
+Copyright (c) 2025 Steve Clement
+Copyright (c) 2024-2025 Sami Mokaddem
 Copyright (c) 2024 CIRCL - Computer Incident Response Center Luxembourg
 ```
