@@ -6,11 +6,10 @@
         "meta": {
             "author": "Sami Mokaddem",
             "level": "expert",
-            "priority": 10,
-            "hall_of_fame": false
+            "priority": 10
         },
         "uuid": "ff5e17cb-9234-4d02-893c-1772f968969f",
-        "version": "2025612"
+        "version": "2025411"
     },
     "inject_flow": [
         {
@@ -223,11 +222,18 @@
                 {
                     "parameters": [
                         {
-                            ". | map( select(.Workflow.name | contains(\"{{user_email}}\")) ) | map( select(.Workflow.enabled)  ) | .[].Workflow.name": {
-                                "extract_type": "all",
-                                "comparison": "count",
+                            ".[].Workflow.name": {
+                                "comparison": "contains",
                                 "values": [
-                                    ">0"
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".[].Workflow.enabled": {
+                                "comparison": "equals",
+                                "values": [
+                                    "1"
                                 ]
                             }
                         }
@@ -237,7 +243,7 @@
                     "evaluation_context": {
                         "request_is_rest": false,
                         "query_context": {
-                            "url": "/workflows/adhoc/searchall:Workflow+of%20User/limit:300",
+                            "url": "/workflows/adhoc/searchall:Workflow+of%20User",
                             "request_method": "GET",
                             "payload": {}
                         }
