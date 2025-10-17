@@ -65,7 +65,6 @@ To get started with SkillAegis, follow these steps:
    source venv/bin/activate
    pip install -U setuptools pip
    pip install -r backend/requirements.txt
-   cp config.py.sample config.py
    # [recommended] Update the configuration
    deactivate
    popd
