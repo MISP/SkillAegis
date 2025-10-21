@@ -76,7 +76,7 @@ To get started with SkillAegis, follow these steps:
    ```
 
 
-## Update
+## Update local installation
 
 To update the project, follow these steps:
 
@@ -130,6 +130,7 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'pip'
 ```
 
+
 ## Docker
 
 You can alternatively run it in Docker, following those steps :
@@ -163,9 +164,57 @@ You can alternatively run it in Docker, following those steps :
     ```
 
 4. Run the application
-    ```bash
+```bash
     docker compose up
     ```
+
+
+## Contributing
+
+We welcome contributions from the community. To contribute:
+
+1. Fork the repository.
+2. Create a new branch:
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3. Make your changes and commit them:
+    ```bash
+    git commit -m 'new: Added fancy feature doing fancy things'
+    ```
+4. Push to the branch:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+5. Open a pull request.
+
+
+## Development environment
+
+If you want a development environment within the 'SkillAegis' entry repository you could do the following.
+
+```
+# Clone your SkillAegis fork
+git clone https://github.com/<fork_user>/SkillAegis.git
+cd SkillAegis
+# Add the official remote for easy syncing
+git remote add upstream https://github.com/MISP/SkillAegis.git
+
+# Initialize submodules (will pull from upstream MISP repos)
+git submodule update --init --recursive
+
+# Now reconfigure submodules to point to YOUR forks
+cd SkillAegis-Editor
+git remote set-url origin https://github.com/<fork_user>/SkillAegis-Editor.git
+git remote add upstream https://github.com/MISP/SkillAegis-Editor.git
+cd ..
+
+cd SkillAegis-Dashboard
+git remote set-url origin https://github.com/<fork_user>/SkillAegis-Dashboard.git
+git remote add upstream https://github.com/MISP/SkillAegis-Dashboard.git
+```
+
+This should allow you to easily work on all 3 repositories for your development environment.
 
 # Project Structure
 
@@ -238,26 +287,6 @@ The [format description](https://github.com/MISP/cexf/blob/main/format-descripti
   "injects": [...],
 }
 ```
-
-
-## Contributing
-
-We welcome contributions from the community. To contribute:
-
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-3. Make your changes and commit them:
-    ```bash
-    git commit -m 'Add some feature'
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature/your-feature-name
-    ```
-5. Open a pull request.
 
 # License
 This software is licensed under GNU Affero General Public License version 3
