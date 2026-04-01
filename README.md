@@ -50,6 +50,7 @@ To get started with SkillAegis, follow these steps:
    ```bash
    # Editor
    pushd SkillAegis-Editor
+   git checkout develop
    python3 -m venv venv
    source venv/bin/activate
    pip install -U setuptools pip
@@ -65,7 +66,7 @@ To get started with SkillAegis, follow these steps:
    source venv/bin/activate
    pip install -U setuptools pip
    pip install -r backend/requirements.txt
-   cp config.py.sample config.py
+   cp backend/config.py.sample backend/config.py
    # [recommended] Update the configuration
    deactivate
    popd
@@ -103,7 +104,7 @@ To update the project, follow these steps:
    source venv/bin/activate
    pip install -U setuptools pip
    pip install -U -r requirements.txt
-   diff -u config.py.sample config.py
+   diff -u backend/config.py.sample backend/config.py
    deactivate
    popd
 
