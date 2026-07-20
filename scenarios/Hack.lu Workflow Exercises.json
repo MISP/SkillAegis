@@ -1,0 +1,193 @@
+{
+    "exercise": {
+        "name": "Hack.lu Workflow Exercises",
+        "namespace": "hack.lu",
+        "description": "Few exercises to learn how to build MISP workflows",
+        "meta": {
+            "author": "MISP Project",
+            "gamification": true,
+            "level": "advanced",
+            "priority": 10
+        },
+        "uuid": "9a3eb2c2-1314-4ba7-8876-fa84f7de5b6b",
+        "version": "20251016"
+    },
+    "inject_flow": [
+        {
+            "inject_uuid": "9558705e-b1ae-44df-96f6-172cf6dc5dfe",
+            "description": "",
+            "requirements": {},
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "3e74b553-858a-4ab6-a135-448b2ac40468",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "9558705e-b1ae-44df-96f6-172cf6dc5dfe"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "6d68113f-0eea-4e95-9f63-2878ff1f0c63",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "3e74b553-858a-4ab6-a135-448b2ac40468"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        }
+    ],
+    "inject_payloads": [],
+    "injects": [
+        {
+            "name": "Enable Your Workflow",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "9558705e-b1ae-44df-96f6-172cf6dc5dfe",
+            "description": "Make your workflow executable by enabling it",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ". | map( select(.Workflow.name | contains(\"{{user_email}}\")) ) | map( select(.Workflow.enabled)  ) | .[].Workflow.name": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/workflows/adhoc/searchall:Workflow+of%20User/limit:300",
+                            "request_method": "GET",
+                            "payload": {}
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        },
+        {
+            "name": "TLP Replacement",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "3e74b553-858a-4ab6-a135-448b2ac40468",
+            "description": "Replace tlp:white by tlp:clear for Event",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "comparison": "equals",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.info": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    "0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "org": "hack.lu",
+                                "tags": [
+                                    "tlp:white",
+                                    "!tlp:clear"
+                                ]
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        },
+        {
+            "name": "False Positive handling",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "6d68113f-0eea-4e95-9f63-2878ff1f0c63",
+            "description": "Remove the IDS flag of all Attributes having hits on Warning lists",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        "e = data['response'][0]\n\nif e['Event']['event_creator_email'] == context.get('user_email', None):\n    return False\n\nfor a in e['Event']['Attribute']:\n    for warning in a.get('warnings', []):\n        if warning['warninglist_category'] == 'false_positive' and a['to_ids']:\n            return False\n\nfor o in e['Event']['Object']:\n    for a in o['Attribute']:\n        for warning in a.get('warnings', []):\n            if warning['warninglist_category'] == 'false_positive' and a['to_ids']:\n                return False\nreturn True"
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "python",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "org": "hack.lu",
+                                "eventid": "1",
+                                "includeWarninglistHits": true
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        }
+    ]
+}

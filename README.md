@@ -6,9 +6,10 @@
 
 ## Features
 
-- **Create Exercise Scenarios**: Design and customize various training exercises tailored to your needs.
-- **Run Exercises**: Deploy scenarios and run training sessions.
-- **Live Dashboard**: Monitor progress and performance with the live dashboard, providing realtime insights and analytics.
+- **Design exercise scenarios**: Build training exercises in the tool-agnostic [Common Exercise Format (CEXF)](https://misp.github.io/cexf/) with the **Editor** — a drag-driven scenario map, a guided inject designer, and a completion-rule builder with a live test.
+- **Run training sessions**: Launch a scenario with the **Dashboard** and track every participant's progress in real time against MISP, Suricata, webhook and Python targets.
+- **Live monitoring**: A real-time leaderboard, a streaming activity feed and a per-player drill-down give facilitators both an at-a-glance and an in-depth view of the session.
+- **Gamification**: Scoring, trophies, "on fire" streaks and a Hall of Fame keep participants engaged, with a fullscreen big-screen view for the room.
 
 
 ## Local installation
@@ -65,11 +66,15 @@ To get started with SkillAegis, follow these steps:
    source venv/bin/activate
    pip install -U setuptools pip
    pip install -r backend/requirements.txt
-   cp config.py.sample config.py
-   # [recommended] Update the configuration
+   cp backend/config.py.sample backend/config.py
+   # [recommended] Update the configuration's MISP connection and admin-panel credentials
    deactivate
    popd
    ```
+   > The Dashboard reads its MISP connection (`misp_url`, `misp_apikey`, `misp_skipssl`) and
+   > optional admin-panel credentials (`admin_email`, `admin_password`) from
+   > `SkillAegis-Dashboard/backend/config.py`. If no admin credentials are set, a random
+   > password is generated at startup and printed to the console / `SkillAegis.log`.
 
 7. Start the project
    ```bash
@@ -77,7 +82,7 @@ To get started with SkillAegis, follow these steps:
    ```
 
 
-## Update
+## Update local installation
 
 To update the project, follow these steps:
 
@@ -112,6 +117,7 @@ To update the project, follow these steps:
    source venv/bin/activate
    pip install -U setuptools pip
    pip install -U -r backend/requirements.txt
+   diff -u backend/config.py.sample backend/config.py
    deactivate
    popd
    ```
@@ -130,6 +136,7 @@ Traceback (most recent call last):
     from pip._internal.cli.main import main
 ModuleNotFoundError: No module named 'pip'
 ```
+
 
 ## Docker
 
@@ -164,9 +171,64 @@ You can alternatively run it in Docker, following those steps :
     ```
 
 4. Run the application
-    ```bash
+```bash
     docker compose up
     ```
+
+
+## Contributing
+
+We welcome contributions from the community. To contribute:
+
+1. Fork the repository.
+2. Create a new branch:
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3. Make your changes and commit them:
+    ```bash
+    git commit -m 'new: Added fancy feature doing fancy things'
+    ```
+4. Push to the branch:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+5. Open a pull request.
+
+
+## Development environment
+
+If you want a development environment within the 'SkillAegis' entry repository you could do the following.
+
+```bash
+# Clone your SkillAegis fork and switch to the integration branch
+git clone https://github.com/<fork_user>/SkillAegis.git
+cd SkillAegis
+git checkout develop
+# Add the official remote for easy syncing
+git remote add upstream https://github.com/MISP/SkillAegis.git
+
+# Initialize submodules (will pull from upstream MISP repos)
+git submodule update --init --recursive
+
+# Now reconfigure submodules to point to YOUR forks
+cd SkillAegis-Editor
+git remote set-url origin https://github.com/<fork_user>/SkillAegis-Editor.git
+git remote add upstream https://github.com/MISP/SkillAegis-Editor.git
+cd ..
+
+cd SkillAegis-Dashboard
+git remote set-url origin https://github.com/<fork_user>/SkillAegis-Dashboard.git
+git remote add upstream https://github.com/MISP/SkillAegis-Dashboard.git
+cd ..
+
+# `submodule update` leaves each submodule in a detached HEAD at the pinned
+# commit — switch them onto a branch before committing any work in them.
+git submodule foreach 'git checkout develop'
+```
+
+This should allow you to easily work on all 3 repositories for your development environment.
+Keep the three repos in sync by syncing each from its `upstream` remote (`git fetch upstream && git merge upstream/develop`).
 
 # Project Structure
 
@@ -184,29 +246,64 @@ SkillAegis is the primary application that configures, launches the two other pr
 
 
 ## SkillAegis Editor
-The **Editor** can be used to design or edit scenario.
+The **Editor** is used to design and edit scenarios. A scenario is a set of **injects** (tasks a
+trainee performs in a target tool) plus a parallel **flow** describing when each fires, what it
+depends on, and how it is scored. Authoring stays **tool-agnostic** — MISP, Suricata, webhook and
+Python targets are all first-class.
 
 ![SkillAegis Editor Scenario Index](./docs/SkillAegis-Editor_index.png)
-*List of all available scenarios*
+*List of all available scenarios, with their CEXF validity, target namespace and inject count.*
 
-![SkillAegis Editor Scenario Designer](./docs/SkillAegis-Editor_designer.png)
-*While designing a scenario, you can create multiple injects, specify their execution order, outline any requirements for each, and define the criteria for evaluating and marking them as complete.*
+![SkillAegis Editor Scenario Map](./docs/SkillAegis-Editor_scenario-map.png)
+*The Scenario Map is a drag-driven overview of the whole exercise: injects are laid out by dependency depth, and you wire up the flow by direct manipulation — drop a card onto another to set a prerequisite, or onto the start rail / timed lane to change when it fires.*
 
-![SkillAegis Editor Inject Tester](./docs/SkillAegis-Editor_inject-tester.png)
-*Writing evaluations for injects can be challenging, so the inject tester is provided to streamline this process.*
+![SkillAegis Editor Guided Inject Designer](./docs/SkillAegis-Editor_designer.png)
+*Each inject is edited through a focused Task → Flow → Completion stepper — separating what the trainee does, when it runs, and how it is scored.*
+
+![SkillAegis Editor Completion step with live test](./docs/SkillAegis-Editor_completion.png)
+*Writing evaluations used to be the hardest part of authoring. Build a completion rule as `field → operator → values` rows (or with the `FROM / WHERE / CHECK` query builder), and the panel on the right re-runs it against sample data as you type — showing a pass/fail verdict and per-condition breakdown without leaving the page.*
 
 
 ## SkillAegis Dashboard
-The **Dashboard** can be used to run a training session and visualize the progress of participants in real-time.
+The **Dashboard** is used to run a training session and visualize the progress of participants in
+real-time. It offers:
+
+- **Real-time leaderboard** — ranks every participant live with per-task progress and scores, plus a task-completion chart that flags the hardest task.
+- **Live activity feed** — a streaming log of participant activity (MISP events, webhooks and tool calls) with verbose / API-only filters and per-user or per-target search.
+- **Player drill-down** — click any participant for a detailed view of their task-by-task timing, activity timeline and searchable event history.
+- **Gamification** — scoring, trophies, "on fire" streaks, a Hall of Fame podium and celebratory all-clear bursts keep sessions engaging.
+- **Presentation & operations** — a fullscreen big-screen overview, a live-connection health indicator (LIVE / NO LIVE DATA / OFFLINE), an authenticated admin panel and a reduce-motion accessibility toggle.
 
 ![SkillAegis Dashboard Active Exercises](./docs/SkillAegis-Dashboard-recording.gif)
-*Short demo of SkillAegis-Dashboard: Once the application starts, the user selects an exercise. From that point, the application tracks the real-time progression of each players.*
+*Short demo of SkillAegis-Dashboard: once the application starts, the user selects an exercise. From that point, the application tracks the real-time progression of each player.*
 
-![SkillAegis Dashboard Active Exercises](./docs/SkillAegis-Dashboard_main.png)
+![SkillAegis Dashboard main page](./docs/SkillAegis-Dashboard_main.png)
 *On the dashboard main page, you can monitor the progress of all participants for the selected exercise and view real-time logs of their activity feed.*
+
+![SkillAegis Dashboard Player Drill-Down](./docs/SkillAegis-Dashboard_player-drilldown.png)
+*Click any participant to open their drill-down: task-by-task timing, badges and scoring streaks, and a searchable history of their events, webhooks and tool calls.*
 
 ![SkillAegis Dashboard Fullscreen](./docs/SkillAegis-Dashboard_fullscreen.png)
 *The fullscreen view provides an overview of the status of all users in a single, easily accessible display.*
+
+
+## Bundled scenarios
+A set of ready-to-run scenarios ships in the [`scenarios/`](./scenarios) folder. Point the Editor or
+Dashboard at that folder (the default) to open, run or use them as a starting point for your own.
+
+| Scenario | Level | Focus |
+|---|---|---|
+| API: Simple Data Creation | beginner | Create a MISP event through the API |
+| API: Basic Filtering | beginner | Filter MISP data through the API |
+| MISP Encoding Exercise: Scam Call | beginner | Encode a scam-call incident in MISP |
+| MISP Encoding Exercise: Spearphishing Incident | beginner | Encode a spearphishing incident in MISP |
+| MISP Encoding Exercise: Flubot Malware | beginner | Encode the Flubot malware case using the MISP data model |
+| MISP Encoding Exercise: Ransomware infection via e-mail | advanced | Encode a ransomware-via-email incident in MISP |
+| Campaign Targeting Multiple ISACs | advanced | Model a campaign spanning several ISACs in MISP |
+| Protect the network! | advanced | Turn IoCs into Suricata protection rules |
+| SOC Analysis Workshop | advanced | Investigate PCAPs, correlate, and feed protective tools (NGSOTI) |
+| Hack.lu Workflow Exercises | advanced | Learn to build MISP workflows |
+| Workflow Exercise | expert | Advanced MISP workflow authoring |
 
 
 ## Scenario format
@@ -239,26 +336,6 @@ The [format description](https://github.com/MISP/cexf/blob/main/format-descripti
   "injects": [...],
 }
 ```
-
-
-## Contributing
-
-We welcome contributions from the community. To contribute:
-
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature/your-feature-name
-    ```
-3. Make your changes and commit them:
-    ```bash
-    git commit -m 'Add some feature'
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature/your-feature-name
-    ```
-5. Open a pull request.
 
 # License
 This software is licensed under GNU Affero General Public License version 3

@@ -1,0 +1,455 @@
+{
+    "exercise": {
+        "name": "SOC Analysis Workshop",
+        "namespace": "NGSOTI",
+        "description": "Investigate PCAP files an through correlation, feed protective tools",
+        "meta": {
+            "author": "CIRCL",
+            "level": "advanced",
+            "priority": 10,
+            "gamification": true
+        },
+        "uuid": "0cb3b4d9-9268-444e-ac9b-00faa0c35de1",
+        "version": "202594"
+    },
+    "inject_flow": [
+        {
+            "inject_uuid": "2b7930e0-cd24-4df4-9302-df69ae785475",
+            "description": "",
+            "requirements": {},
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": 30,
+                "periodic_run_every": 15
+            }
+        },
+        {
+            "inject_uuid": "ccb683d4-ab82-459f-b6d1-5bcec232e818",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "2b7930e0-cd24-4df4-9302-df69ae785475"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "53757e05-4370-48e8-8d10-7b7082a109d6",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "ccb683d4-ab82-459f-b6d1-5bcec232e818"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "1945534e-ded2-40be-90e0-9ea415f52a4b",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "53757e05-4370-48e8-8d10-7b7082a109d6"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "c158b03f-a9b6-4492-8340-b37606a93d47",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "1945534e-ded2-40be-90e0-9ea415f52a4b"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "manual",
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        },
+        {
+            "inject_uuid": "720c5db1-495a-4f20-b54f-27f98ac76f41",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "c158b03f-a9b6-4492-8340-b37606a93d47"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [
+                    "periodic"
+                ],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": 10
+            }
+        }
+    ],
+    "inject_payloads": [],
+    "injects": [
+        {
+            "name": "Report from CSIRT received",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "2b7930e0-cd24-4df4-9302-df69ae785475",
+            "description": "A European CSIRT sends a report (MISP event #1) to an ISAC where the SOC is a member.",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.uuid": {
+                                "comparison": "equals",
+                                "values": [
+                                    "1d34bc17-4861-4ad7-b73e-cd1695a754af"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "eventid": "1d34bc17-4861-4ad7-b73e-cd1695a754af"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        },
+        {
+            "name": "Detection and report created in MISP",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "ccb683d4-ab82-459f-b6d1-5bcec232e818",
+            "description": "Using the received rule, Tenzir/zeek does a detection in pcap/zeek and reports it in MISP",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.Attribute[].Sighting | select(. != null)": {
+                                "extract_type": "all",
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "eventid": "1d34bc17-4861-4ad7-b73e-cd1695a754af"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
+        {
+            "name": "Find & Encode malicious IP",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "53757e05-4370-48e8-8d10-7b7082a109d6",
+            "description": "SOC operators starts an investigation in the pcap files (headscale/tailscale/SOC infrastructure) ",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[].value, .response[].Event.Attribute[].value] | .[]": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "193.168.120.28"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "value": "193.168.120.28",
+                                "org": "!ORGNAME"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        "import random\n\nreturn random.randint(1, 15) == 1 and context['user_email'] != 'user10@org-admin.main.test'"
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "python",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
+        {
+            "name": "Encode Shellcode",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "1945534e-ded2-40be-90e0-9ea415f52a4b",
+            "description": "SOC operators find Shellcode and does further analysis ",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[].value, .response[].Event.Attribute[].value] | .[]": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "204e53ef058c1e6ccf09b1cd49bf2c3a86497ae9"
+                                ]
+                            }
+                        },
+                        {
+                            "[.response[].Event.Object[].Attribute[].value, .response[].Event.Attribute[].value] | .[]": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "4d3c24120f982bdc0f7a872b1ed8a7773b495abd"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "value": "204e53ef058c1e6ccf09b1cd49bf2c3a86497ae9",
+                                "org": "!ORGNAME"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        "import random\n\nreturn random.randint(1, 15) == 1 and context['user_email'] != 'user10@org-admin.main.test'"
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "python",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
+        {
+            "name": "Upload on Kunai",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "c158b03f-a9b6-4492-8340-b37606a93d47",
+            "description": "SOC operators upload this on kunai sandbox ",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[] | select((.comment == \"Malware Sample Analyzed\"))": {
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "org": "!ORGNAME",
+                                "timestamp": "7d"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        "import random\n\nreturn random.randint(1, 15) == 1 and context['user_email'] != 'user10@org-admin.main.test'"
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "python",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        },
+        {
+            "name": "Case created in FlowIntel and shared on MISP",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "720c5db1-495a-4f20-b54f-27f98ac76f41",
+            "description": "SOC operators create a case and share their findings.",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {
+                            ".response[].Event.event_creator_email": {
+                                "extract_type": "all",
+                                "comparison": "contains",
+                                "values": [
+                                    "{{user_email}}"
+                                ]
+                            }
+                        },
+                        {
+                            ".response[].Event.Object[] | select((.name == \"flowintel-case\"))": {
+                                "comparison": "count",
+                                "values": [
+                                    ">0"
+                                ]
+                            }
+                        }
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_search",
+                    "evaluation_context": {
+                        "request_is_rest": false,
+                        "query_context": {
+                            "url": "/events/restSearch",
+                            "request_method": "POST",
+                            "payload": {
+                                "org": "!ORGNAME",
+                                "timestamp": "7d"
+                            }
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                },
+                {
+                    "parameters": [
+                        "import random\n\nreturn random.randint(1, 15) == 1 and context['user_email'] != 'user10@org-admin.main.test'"
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "python",
+                    "evaluation_context": {},
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": "OR"
+        }
+    ]
+}

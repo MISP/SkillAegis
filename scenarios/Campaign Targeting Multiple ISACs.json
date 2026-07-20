@@ -413,7 +413,7 @@
                             }
                         },
                         {
-                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value | match(\"https://c2.[a-z]{6}.deadnxuyla.ru\"))": {
+                            "[.Event.Object[].Attribute[], .Event.Attribute[]] | .[] | select(.value | match(\"http://c2.[a-z]{6}.deadnxuyla.ru\"))": {
                                 "extract_type": "all",
                                 "comparison": "count",
                                 "values": [
@@ -441,7 +441,7 @@
                             }
                         },
                         {
-                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[] | select(.value | match(\"https://c2.[a-z]{6}.deadnxuyla.ru\"))": {
+                            "[.response[].Event.Object[].Attribute[], .response[].Event.Attribute[]] | .[] | select(.value | match(\"http://c2.[a-z]{6}.deadnxuyla.ru\"))": {
                                 "extract_type": "all",
                                 "comparison": "count",
                                 "values": [
