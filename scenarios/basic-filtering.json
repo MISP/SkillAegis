@@ -36,6 +36,22 @@
             }
         },
         {
+            "inject_uuid": "9dfd6a93-64b5-431f-aee5-fc12f83f8bc8",
+            "description": "",
+            "requirements": {
+                "inject_uuid": "156ca5fd-841d-42bc-b2f9-80f71f81c532"
+            },
+            "sequence": {
+                "followed_by": [],
+                "trigger": [],
+                "completion_trigger": []
+            },
+            "timing": {
+                "triggered_at": null,
+                "periodic_run_every": null
+            }
+        },
+        {
             "inject_uuid": "0f70f7dc-cada-4a27-9766-eac9938a3239",
             "description": "",
             "requirements": {
@@ -130,25 +146,6 @@
                 "triggered_at": null,
                 "periodic_run_every": null
             }
-        },
-        {
-            "inject_uuid": "1da0fdc8-9d0d-4618-a811-66491e196833",
-            "description": "Event count with `Phishing - T1566` involved",
-            "requirements": {
-                "inject_uuid": "3e96fb13-4aba-448c-8d79-efb93392cc88"
-            },
-            "sequence": {
-                "completion_trigger": [
-                    "time_expiration",
-                    "completion"
-                ],
-                "followed_by": [],
-                "trigger": []
-            },
-            "timing": {
-                "triggered_at": null,
-                "periodic_run_every": null
-            }
         }
     ],
     "inject_payloads": [],
@@ -168,6 +165,34 @@
                         "request_is_rest": true,
                         "query_context": {
                             "url": "/users/view/me",
+                            "request_method": "GET"
+                        }
+                    },
+                    "score_range": [
+                        0,
+                        20
+                    ]
+                }
+            ],
+            "inject_evaluation_join_type": null
+        },
+        {
+            "name": "Get Specific Event",
+            "action": "",
+            "target_tool": "MISP",
+            "uuid": "9dfd6a93-64b5-431f-aee5-fc12f83f8bc8",
+            "description": "Get Event with specific UUID",
+            "inject_evaluation": [
+                {
+                    "parameters": [
+                        {}
+                    ],
+                    "result": "",
+                    "evaluation_strategy": "query_mirror",
+                    "evaluation_context": {
+                        "request_is_rest": true,
+                        "query_context": {
+                            "url": "/events/view/848a3172-1301-4cbd-8398-435b00904c20",
                             "request_method": "GET"
                         }
                     },
@@ -241,7 +266,8 @@
                 {
                     "parameters": [
                         {
-                            "type": "url"
+                            "type": "url",
+                            "to_ids": 1
                         }
                     ],
                     "result": "All URLs",
@@ -357,39 +383,6 @@
                     "score_range": [
                         0,
                         30
-                    ]
-                }
-            ],
-            "inject_evaluation_join_type": null
-        },
-        {
-            "name": "Event count with `Phishing - T1566` involved",
-            "action": "phishing_count",
-            "target_tool": "MISP",
-            "uuid": "1da0fdc8-9d0d-4618-a811-66491e196833",
-            "description": null,
-            "inject_evaluation": [
-                {
-                    "parameters": [
-                        {
-                            "returnFormat": "attack",
-                            "tags": [
-                                "misp-galaxy:mitre-attack-pattern=\"Phishing - T1566\""
-                            ]
-                        }
-                    ],
-                    "result": "Phising counted",
-                    "evaluation_strategy": "query_mirror",
-                    "evaluation_context": {
-                        "request_is_rest": true,
-                        "query_context": {
-                            "url": "/events/restSearch",
-                            "request_method": "POST"
-                        }
-                    },
-                    "score_range": [
-                        0,
-                        10
                     ]
                 }
             ],

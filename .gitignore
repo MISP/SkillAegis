@@ -1,3 +1,5 @@
 config.json
+.env
+*.bak
 __pycache__
 __pycache__/*

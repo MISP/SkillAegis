@@ -5,7 +5,8 @@
         "meta": {
             "author": "MISP Project",
             "level": "beginner",
-            "priority": 5
+            "priority": 5,
+            "gamification": false
         },
         "name": "MISP Encoding Exercise : Spearphishing Incident",
         "namespace": "misp-only",
@@ -15,7 +16,7 @@
         ],
         "total_duration": "7200",
         "uuid": "53b20321-ac8c-4a3e-9c56-e772caf669e6",
-        "version": "202492"
+        "version": "2025812"
     },
     "inject_flow": [
         {
